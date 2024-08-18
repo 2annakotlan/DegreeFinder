@@ -58,7 +58,7 @@ def get_degree_match(degree_req):
         non_zero_degree_matches_dict = {degree: match for degree, match in sorted_degree_matches_dict.items() if match != 0} # removing 0 percent match
 
         # save as a dataframe
-        degree_matches_df = degree_matches_df.append({'Degree': degree, 'Percent Match': percent_degree_match}, ignore_index = True) # dataframe of each degree and % match (not preserving the original index of the data)
+        degree_matches_df = pd.concat([degree_matches_df, pd.DataFrame([{'Degree': degree, 'Percent Match': percent_degree_match}])], ignore_index=True) # dataframe of each degree and % match (not preserving the original index of the data)
         sorted_degree_matches_df = degree_matches_df.sort_values(by = 'Percent Match', ascending = False) # sorted from greatest to least
         non_zero_degree_matches_df = sorted_degree_matches_df[sorted_degree_matches_df['Percent Match'] != 0] # removing 0 percent match
 
