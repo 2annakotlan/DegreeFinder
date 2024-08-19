@@ -107,4 +107,4 @@ with col1:
 with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
-st.write("Created by by Anna Kotlan, class of 2025")
+st.write("-created by Anna Kotlan, class of 2025")
