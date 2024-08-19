@@ -44,31 +44,33 @@ checked_courses = [course for course, checked in checked_boxes.items() if checke
 
 
 # CALCULATION
-# function to calculate percent degree match
 def get_degree_match(degree_req):
     degree_matches_dict = {}
-    degree_matches_df = pd.DataFrame(columns=['Degree','Percent Match'])
+    degree_matches_list = []  # Use a list to store rows for the DataFrame
 
-    for degree, courses in degree_req.items(): # for each degree...
-        common_courses = [course for course in courses if course in checked_courses] # list of common courses between courses of interest and required courses
-        num_common_courses = len(common_courses) # number of common courses between courses of interest and required courses
-        num_req_courses = len(courses) # number of required courses
-        if num_req_courses == 0:
-            percent_degree_match = 0.0
-        else:
-            percent_degree_match = (num_common_courses / num_req_courses) * 100 # percent of degree completed if they were to take those courses of interest
+    for degree, courses in degree_req.items():
+        common_courses = [course for course in courses if course in checked_courses]
+        num_common_courses = len(common_courses)
+        num_req_courses = len(courses)
+        percent_degree_match = (num_common_courses / num_req_courses) * 100 if num_req_courses != 0 else 0.0
 
-        # save as a dictionary
-        degree_matches_dict[degree] = percent_degree_match # dictionary of each degree and % match
-        sorted_degree_matches_dict = dict(sorted(degree_matches_dict.items(), key=lambda item: item[1], reverse = True)) # sorted from greatest to least
-        non_zero_degree_matches_dict = {degree: match for degree, match in sorted_degree_matches_dict.items() if match != 0} # removing 0 percent match
+        # Save to dictionary
+        degree_matches_dict[degree] = percent_degree_match
 
-        # save as a dataframe
-        degree_matches_df = degree_matches_df.append({'Degree': degree, 'Percent Match': percent_degree_match}, ignore_index = True) # dataframe of each degree and % match (not preserving the original index of the data)
-        sorted_degree_matches_df = degree_matches_df.sort_values(by = 'Percent Match', ascending = False) # sorted from greatest to least
-        non_zero_degree_matches_df = sorted_degree_matches_df[sorted_degree_matches_df['Percent Match'] != 0] # removing 0 percent match
+        # Prepare row for DataFrame
+        degree_matches_list.append({'Degree': degree, 'Percent Match': percent_degree_match})
+
+    # Convert list of rows into a DataFrame
+    degree_matches_df = pd.DataFrame(degree_matches_list)
+
+    # Sorting and filtering
+    sorted_degree_matches_dict = dict(sorted(degree_matches_dict.items(), key=lambda item: item[1], reverse=True))
+    non_zero_degree_matches_dict = {degree: match for degree, match in sorted_degree_matches_dict.items() if match != 0}
+    sorted_degree_matches_df = degree_matches_df.sort_values(by='Percent Match', ascending=False)
+    non_zero_degree_matches_df = sorted_degree_matches_df[sorted_degree_matches_df['Percent Match'] != 0]
 
     return non_zero_degree_matches_dict, non_zero_degree_matches_df
+
 
 # call the function
 major_degree_matches_dict, major_degree_matches_df = get_degree_match(major_degree_req)
