@@ -1,6 +1,6 @@
 requests==2.32.3
 beautifulsoup4==4.12.3
 streamlit==1.37.1
-plotly==5.15.0
+#plotly==5.15.0
 pandas==2.0.1
 
