@@ -1,8 +1,8 @@
---upgrade
 #pandas==2.0.2
 #beautifulsoup4==4.12.3
 #numpy==1.24.0
 #soupsieve==2.6
 streamlit==1.37.1
-plotly==5.15.0 --force-reinstall
+plotly==5.15.0
+pip==24.2
 #requests==2.31.0
