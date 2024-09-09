@@ -1,6 +1,6 @@
 import streamlit as st
-import plotly.express as px
 import pandas as pd
+import plotly.express as px
 
 # DISPLAY
 st.title("Which Degree Best Suits You?") # title
