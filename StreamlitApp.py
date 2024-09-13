@@ -40,13 +40,13 @@ checked_courses = [course for course, checked in checked_boxes.items() if checke
 # function to calculate percent degree match
 def get_degree_match(degree_req):
     degree_matches_dict = {}
-    degree_matches_list = []  
+    degree_matches_list = []
 
     for degree, courses in degree_req.items(): # for each degree...
         common_courses = [course for course in courses if course in checked_courses] # list of common courses between courses of interest and required courses
         num_common_courses = len(common_courses) # number of common courses between courses of interest and required courses
         num_req_courses = len(courses) # number of required courses
-        percent_degree_match = (num_common_courses / num_req_courses) * 100 if num_req_courses != 0 else 0.0  #percent of degree completed if they were to take those courses of interest
+        percent_degree_match = (num_common_courses / num_req_courses) * 100 if num_req_courses != 0 else 0.0  # percent of degree completed if they were to take those courses of interest
 
         # save as a dictionary
         degree_matches_dict[degree] = percent_degree_match
@@ -57,7 +57,7 @@ def get_degree_match(degree_req):
     # convert list of rows into a DataFrame
     degree_matches_df = pd.DataFrame(degree_matches_list)
 
-    # Sorting and filtering
+    # sorting and filtering
     sorted_degree_matches_dict = dict(sorted(degree_matches_dict.items(), key=lambda item: item[1], reverse=True)) # sorted from greatest to least
     non_zero_degree_matches_dict = {degree: match for degree, match in sorted_degree_matches_dict.items() if match != 0} # removing 0 percent match
     sorted_degree_matches_df = degree_matches_df.sort_values(by='Percent Match', ascending=False) # sorted from greatest to least
@@ -79,6 +79,7 @@ def display_bar_chart(degree_matches_df, title):
                            color_continuous_scale = 'Blues') # blue gradient barchart
     bar_chart.update_layout(xaxis_title=None) # hide x-axis label "degree"
     bar_chart.update_layout(coloraxis_showscale = False) # hide color scale bar
+    bar_chart.update_layout(xaxis_tickangle=90)  # make the x-axis labels verticle
     bar_chart.update_traces(hovertemplate='%{x}: %{y:.2f}%') # hover to show degree: percentage match %
     bar_chart = st.plotly_chart(bar_chart, use_container_width = True) # display bar chart (expanding to fill the full width)
     return bar_chart
@@ -107,4 +108,5 @@ with col1:
 with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
+st.write()
 st.write("Designed by Anna Kotlan, class of 2025")
