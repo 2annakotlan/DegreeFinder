@@ -8,7 +8,7 @@ st.sidebar.header("Select Courses") # sidebar title
 
 # DATA
 # degree requirements dictionary
-from CourseReq import major_degree_req, minor_degree_req
+from DegreeReq import major_degree_req, minor_degree_req
 degree_req = {**major_degree_req, **minor_degree_req}
 
 # degree descriptions dictionary
