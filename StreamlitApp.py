@@ -71,6 +71,7 @@ minor_degree_matches_dict, minor_degree_matches_df = get_degree_match(minor_degr
 
 # BAR CHART
 def display_bar_chart(degree_matches_df, title):
+    degree_matches_df = degree_matches_df.head(10) # only display the first 10 matches for visual aesthetics
     bar_chart = px.bar(degree_matches_df,
                            x = 'Degree', # x-axis
                            y = 'Percent Match', # y-axis
