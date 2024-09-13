@@ -4,7 +4,7 @@
 #plotly==5.15.0
 #pandas==1.5.3
 #numpy==1.23.5
-distutils
+setuptools==74.1.2
 requests
 beautifulsoup4
 streamlit
