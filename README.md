@@ -4,13 +4,14 @@
 - helps Bentley University students chose their degree by selecting classes that interest them
 
 **App Features**
-- checkboxes of classes (with hovering tooltip to view class descriptions)
+- checkboxes of classes (with hovering tooltip to view class descriptions and dropdown to filter classes)
 - barcharts to display percent degree matches
 - lists to display percent degree matches (with hovering toolip and hyperlink to view major / minor descriptions)
 
 **App Files**
 - **CourseAZLinks:** gets class code urls (ie. https://catalog.bentley.edu/undergraduate/courses/ac/)
 - **CourseDescriptions:** gets course descriptions
+- **CourseDepartment:** gets course departments
 - **DegreeLinksList:** gets degree urls (ie. https://catalog.bentley.edu/undergraduate/programs/business-programs/accountancy-major/)
 - **DegreeLinksDict:** gets degrees + degree urls (ie. 'Accounting Major (B.S.)': 'https://catalog.bentley.edu/undergraduate/programs/business-programs/accountancy-major/')
 - **DegreeReq:** gets degree requirements (classes within "major courses") (ie. {'Accounting Major (B.S.)': ['Preparing and Interpreting Financial Statements', 'Performance Measurement', 'Cost Management', 'Financial Accounting and Reporting I', 'Financial Accounting and Reporting II', 'Accounting Information Systems', 'Federal Taxation', 'Financial Statement Auditing', 'Internal Auditing'])
