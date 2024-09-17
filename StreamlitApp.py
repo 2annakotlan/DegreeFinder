@@ -28,7 +28,7 @@ course_des = {course: description for course, description in course_des.items() 
 #from CourseDepartment import course_department #NEED TO FIX
 try:
     from fromCorseDepartment import course_department
-    st.write("works)
+    st.write("works")
 except ImportError:
     st.write("not work")
 
