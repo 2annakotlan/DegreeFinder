@@ -24,17 +24,80 @@ from CourseDescriptions import course_des
 degree_req_courses_list = set([course for degree in degree_req.values() for course in degree]) # all unique courses in degree_req
 course_des = {course: description for course, description in course_des.items() if course in degree_req_courses_list} # course_des without courses that don't exist in degree_req
 
-# CHECKBOXES
-# sidebar of checkboxes
-checked_boxes = {} # dictionary to store the checked state of each checkbox
+# all course department dictionary
+from CourseDepartment import course_department
 
-for course, course_des in course_des.items():
-    checked_boxes[course] = st.sidebar.checkbox(
-        label = course,  # text for the checkbox
-        help = course_des  # tooltip for course description
+# filtered course department dictionary for checkboxes
+degree_req_courses_list = set([course for degree in degree_req.values() for course in degree]) # all unique courses in degree_req
+course_department = {course: department for course, department in course_department.items() if course in degree_req_courses_list} # course_des without courses that don't exist in degree_req
+
+# CHECKBOX DROPDOWN 
+selected_departments = []
+selected_degrees = []
+search_query = ''
+
+# main dropdown to select the filter type
+selected_filter_type = st.sidebar.selectbox(
+    label='Filter by...',
+    options=['', 'Department', 'Degree', 'Class Name'],
+    index=0
+)
+
+# initialize displayed_course_des
+displayed_course_des = course_des.copy()
+
+# show the appropriate filter widget based on the selected filter type
+if selected_filter_type == 'Department':
+    # department drop down
+    selected_departments = st.sidebar.multiselect(
+        label='Select department(s)...',
+        options=list(set(course_department.values())),
+        default=[]
+    )
+    # department filter
+    if selected_departments:
+        displayed_course = [course for course, dept in course_department.items() if dept in selected_departments]
+        displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
+
+if selected_filter_type == 'Degree':
+    # degree dropdown
+    selected_degrees = st.sidebar.multiselect(
+        label='Select degree(s)...',
+        options=list(set(degree_req.keys())),
+        default=[]
+    )
+    # degree filter
+    if selected_degrees:
+        displayed_course = set(course for degree in selected_degrees for course in degree_req[degree])
+        displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
+
+# search query
+if selected_filter_type == 'Class Name':
+    # search query bar
+    search_query = (st.sidebar.text_input('Search for class...', '')).lower()
+    # search query filter
+    if search_query:
+        displayed_course_des = {course: description for course, description in course_des.items() if search_query in course.lower()}
+
+# CHECKBOXES 
+# initialize session state for all courses
+if 'checked_boxes' not in st.session_state:
+    st.session_state.checked_boxes = {course: False for course in course_des}
+
+# display checkboxes only for filtered courses, retaining their state
+for course in displayed_course_des:
+    st.session_state.checked_boxes[course] = st.sidebar.checkbox(
+        label=course,  # text for the checkbox
+        help=displayed_course_des[course],  # tooltip for course description
+        value=st.session_state.checked_boxes.get(course, False)  # maintain previous checked state
     )
 
-checked_courses = [course for course, checked in checked_boxes.items() if checked] # list of checked courses
+checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked] # list of checked courses
+
+# analytics about boxes
+total_selected_boxes = len(checked_courses)
+total_boxes = len(course_des)
+st.sidebar.markdown(f'<p style="color:#FF5733; font-weight:bold;">{total_selected_boxes} out of {total_boxes} classes selected</p>', unsafe_allow_html=True)
 
 # CALCULATION
 # function to calculate percent degree match
@@ -111,5 +174,4 @@ with col1:
 with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
-st.write()
-st.write("Designed by Anna Kotlan, class of 2025")
+st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, class of 2025</p>', unsafe_allow_html=True)
