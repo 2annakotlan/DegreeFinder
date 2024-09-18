@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# DISPLAY
+# DISPLAY **************************************************************************************************************
 st.title("Which Degree Best Suits You?") # title
 st.sidebar.header("Select Courses") # sidebar title
 
-# DATA
+# DATA *****************************************************************************************************************
 # degree requirements dictionary
 from DegreeReq import major_degree_req, minor_degree_req
 degree_req = {**major_degree_req, **minor_degree_req}
@@ -17,80 +17,49 @@ from DegreeDescriptions import major_degree_des, minor_degree_des
 # degree link dictionary
 from DegreeLinksDict import major_url_dict, minor_url_dict
 
-# all course descriptions dictionary
-from CourseDescriptions import course_des
-
-# filtered course descriptions dictionary for checkboxes
+# descriptions dictionary (that count towards degree requirements)
+from CourseDescriptions import course_des # all course descriptions
 degree_req_courses_list = set([course for degree in degree_req.values() for course in degree]) # all unique courses in degree_req
 course_des = {course: description for course, description in course_des.items() if course in degree_req_courses_list} # course_des without courses that don't exist in degree_req
 
-# all course department dictionary
-from CourseDepartment import course_department 
-
-# filtered course department dictionary for checkboxes
+# department dictionary (that count towards degree requirements)
+from CourseDepartment import course_department # all course departments
 degree_req_courses_list = set([course for degree in degree_req.values() for course in degree]) # all unique courses in degree_req
 course_department = {course: department for course, department in course_department.items() if course in degree_req_courses_list} # course_des without courses that don't exist in degree_req
 
-# CHECKBOX DROPDOWN 
-selected_departments = []
-selected_degrees = []
-search_query = ''
+# DROPDOWNS AND FILTERS ************************************************************************************************
+displayed_course_des = course_des.copy() # displayed courses 
 
-# main dropdown to select the filter type
-selected_filter_type = st.sidebar.selectbox(
-    label='Filter by...',
-    options=['', 'department', 'degree', 'class'],
-    index=0
-)
-
-# initialize displayed_course_des
-displayed_course_des = course_des.copy()
-
-# show the appropriate filter widget based on the selected filter type
-if selected_filter_type == 'department':
-    # department drop down
-    selected_departments = st.sidebar.multiselect(
-        label='Select department(s)...',
-        options=list(set(course_department.values())),
-        default=[]
-    )
-    # department filter
-    if selected_departments:
+# main dropdown
+selected_filter_type = st.sidebar.selectbox(label="Filter by...", options=[" ", "department", "degree", "class"], index=0)
+# department dropdown
+if selected_filter_type == "department":
+    selected_departments = st.sidebar.multiselect(label="Select department(s)...", options=list(set(course_department.values())), default=[]) # dropdown
+    if selected_departments: # filtering displayed courses
         displayed_course = [course for course, dept in course_department.items() if dept in selected_departments]
         displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
-
-if selected_filter_type == 'degree':
-    # degree dropdown
-    selected_degrees = st.sidebar.multiselect(
-        label='Select degree(s)...',
-        options=list(set(degree_req.keys())),
-        default=[]
-    )
-    # degree filter
-    if selected_degrees:
+# degree dropdown
+if selected_filter_type == "degree":
+    selected_degrees = st.sidebar.multiselect(label="Select degree(s)...", options=list(set(degree_req.keys())), default=[]) # dropdown
+    if selected_degrees: # filtering displayed courses
         displayed_course = set(course for degree in selected_degrees for course in degree_req[degree])
         displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
-
 # search query
-if selected_filter_type == 'class':
-    # search query bar
-    search_query = (st.sidebar.text_input('Search for class...', '')).lower()
-    # search query filter
-    if search_query:
+if selected_filter_type == "class":
+    search_query = st.sidebar.text_input(label="Search for a class...", value="") # dropdown
+    if search_query: # filtering displayed courses
         displayed_course_des = {course: description for course, description in course_des.items() if search_query in course.lower()}
 
-# CHECKBOXES 
+# CHECKBOXES ***********************************************************************************************************
 # initialize session state for all courses
-if 'checked_boxes' not in st.session_state:
-    st.session_state.checked_boxes = {course: False for course in course_des}
+if 'checked_boxes' not in st.session_state: st.session_state.checked_boxes = {course: False for course in course_des}
 
-# display checkboxes only for filtered courses, retaining their state
+# display checkboxes only for filtered (displayed) courses, retaining their state
 for course in displayed_course_des:
     st.session_state.checked_boxes[course] = st.sidebar.checkbox(
-        label=course,  # text for the checkbox
-        help=displayed_course_des[course],  # tooltip for course description
-        value=st.session_state.checked_boxes.get(course, False)  # maintain previous checked state
-    )
+        label=course, # text for the checkbox
+        help=displayed_course_des[course], # tooltip for course description
+        value=st.session_state.checked_boxes.get(course, False)) # maintain previous checked state
 
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked] # list of checked courses
 
@@ -99,7 +68,7 @@ total_selected_boxes = len(checked_courses)
 total_boxes = len(course_des)
 st.sidebar.markdown(f'<p style="color:#FF5733; font-weight:bold;">{total_selected_boxes} out of {total_boxes} classes selected</p>', unsafe_allow_html=True)
 
-# CALCULATION
+# CALCULATION **********************************************************************************************************
 # function to calculate percent degree match
 def get_degree_match(degree_req):
     degree_matches_dict = {}
@@ -132,7 +101,7 @@ def get_degree_match(degree_req):
 major_degree_matches_dict, major_degree_matches_df = get_degree_match(major_degree_req)
 minor_degree_matches_dict, minor_degree_matches_df = get_degree_match(minor_degree_req)
 
-# BAR CHART
+# BAR CHART ************************************************************************************************************
 def display_bar_chart(degree_matches_df, title):
     degree_matches_df = degree_matches_df.head(10) # only display the first 10 matches for visual aesthetics
     bar_chart = px.bar(degree_matches_df,
@@ -156,7 +125,7 @@ with col2:
     if not minor_degree_matches_df.empty: # don't have an empty graph
         display_bar_chart(minor_degree_matches_df, 'Minor Match')
 
-# LIST
+# LIST *****************************************************************************************************************
 def display_list(degree_matches_dict, degree_des, url_dict):
     formatted_list = []
 
@@ -174,4 +143,5 @@ with col1:
 with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
+# DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
