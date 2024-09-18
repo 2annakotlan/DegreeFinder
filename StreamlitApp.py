@@ -39,7 +39,7 @@ search_query = ''
 # main dropdown to select the filter type
 selected_filter_type = st.sidebar.selectbox(
     label='Filter by...',
-    options=['', 'department', 'degree', 'class name'],
+    options=['', 'department', 'degree', 'class'],
     index=0
 )
 
@@ -72,7 +72,7 @@ if selected_filter_type == 'degree':
         displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
 
 # search query
-if selected_filter_type == 'class name':
+if selected_filter_type == 'class':
     # search query bar
     search_query = (st.sidebar.text_input('Search for class...', '')).lower()
     # search query filter
