@@ -39,7 +39,7 @@ search_query = ''
 # main dropdown to select the filter type
 selected_filter_type = st.sidebar.selectbox(
     label='Filter by...',
-    options=['', 'Department', 'Degree', 'Class Name'],
+    options=['', 'department', 'degree', 'class name'],
     index=0
 )
 
@@ -47,7 +47,7 @@ selected_filter_type = st.sidebar.selectbox(
 displayed_course_des = course_des.copy()
 
 # show the appropriate filter widget based on the selected filter type
-if selected_filter_type == 'Department':
+if selected_filter_type == 'department':
     # department drop down
     selected_departments = st.sidebar.multiselect(
         label='Select department(s)...',
@@ -59,7 +59,7 @@ if selected_filter_type == 'Department':
         displayed_course = [course for course, dept in course_department.items() if dept in selected_departments]
         displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
 
-if selected_filter_type == 'Degree':
+if selected_filter_type == 'degree':
     # degree dropdown
     selected_degrees = st.sidebar.multiselect(
         label='Select degree(s)...',
@@ -72,7 +72,7 @@ if selected_filter_type == 'Degree':
         displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
 
 # search query
-if selected_filter_type == 'Class Name':
+if selected_filter_type == 'class name':
     # search query bar
     search_query = (st.sidebar.text_input('Search for class...', '')).lower()
     # search query filter
