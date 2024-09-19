@@ -44,9 +44,10 @@ if selected_filter_type == "degree":
     if selected_degrees: # filtering displayed courses
         displayed_course = set(course for degree in selected_degrees for course in degree_req[degree])
         displayed_course_des = {course: description for course, description in course_des.items() if course in displayed_course}
+
 # search query
 if selected_filter_type == "class":
-    search_query = st.sidebar.text_input(label="Search for a class...", value="") # dropdown
+    search_query = st.sidebar.text_input(label="Search for a class...", value="").lower() # dropdown
     if search_query: # filtering displayed courses
         displayed_course_des = {course: description for course, description in course_des.items() if search_query in course.lower()}
 
@@ -121,9 +122,11 @@ col1, col2 = st.columns(2) # creating two columns
 with col1:
     if not major_degree_matches_df.empty: # don't have an empty graph
         display_bar_chart(major_degree_matches_df, 'Major Match')
+        st.write("")
 with col2:
     if not minor_degree_matches_df.empty: # don't have an empty graph
         display_bar_chart(minor_degree_matches_df, 'Minor Match')
+        st.write("")
 
 # LIST *****************************************************************************************************************
 def display_list(degree_matches_dict, degree_des, url_dict):
