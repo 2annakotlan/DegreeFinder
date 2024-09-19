@@ -140,11 +140,11 @@ def display_list(degree_matches_dict, degree_des, url_dict):
 col1, col2 = st.columns(2) # creating two columns
 with col1:
     if not major_degree_matches_df.empty: # don't have an empty list
-        st.write("Major Match")
+        st.markdown('<p style="font-weight:bold;">Major Match</p>', unsafe_allow_html=True)
         display_list(major_degree_matches_dict, major_degree_des, major_url_dict)
 with col2:
     if not minor_degree_matches_df.empty: # don't have an empty list
-        st.write("Minor Match")
+        st.markdown('<p style="font-weight:bold;">Minor Match</p>', unsafe_allow_html=True)
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
 # DISPLAY **************************************************************************************************************
