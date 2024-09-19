@@ -117,13 +117,14 @@ def display_bar_chart(degree_matches_df, title):
     bar_chart = st.plotly_chart(bar_chart, use_container_width = True) # display bar chart (expanding to fill the full width)
     return bar_chart
 
-col1, col2 = st.columns(2) # creating two columns
-with col1:
-    if not major_degree_matches_df.empty: # don't have an empty graph
-        display_bar_chart(major_degree_matches_df, 'Major Match')
-with col2:
-    if not minor_degree_matches_df.empty: # don't have an empty graph
-        display_bar_chart(minor_degree_matches_df, 'Minor Match')
+with st.beta_expander("Major and Minor Matches"):
+    col1, col2 = st.columns(2)
+    with col1:
+        if not major_degree_matches_df.empty:
+            display_bar_chart(major_degree_matches_df, 'Major Match')
+    with col2:
+        if not minor_degree_matches_df.empty:
+            display_bar_chart(minor_degree_matches_df, 'Minor Match')
 
 # LIST *****************************************************************************************************************
 def display_list(degree_matches_dict, degree_des, url_dict):
@@ -137,11 +138,12 @@ def display_list(degree_matches_dict, degree_des, url_dict):
     st.markdown('<br>'.join(formatted_list), unsafe_allow_html=True)
     return formatted_list
 
-col1, col2 = st.columns(2) # creating two columns
-with col1:
-    display_list(major_degree_matches_dict, major_degree_des, major_url_dict)
-with col2:
-    display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
+with st.beta_expander("Major and Minor Lists"):
+    col1, col2 = st.columns(2)
+    with col1:
+        display_list(major_degree_matches_dict, major_degree_des, major_url_dict)
+    with col2:
+        display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
