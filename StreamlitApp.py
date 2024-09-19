@@ -3,9 +3,8 @@ import pandas as pd
 import plotly.express as px
 
 # DISPLAY **************************************************************************************************************
-st.set_page_config(initial_sidebar_state="expanded")
-
 st.markdown('<p style="font-weight:bold; font-size:22px;">Which Degree Best Suits You?</p>', unsafe_allow_html=True) # title
+st.set_page_config(initial_sidebar_state="expanded") # make sidebar open by default
 st.sidebar.header("Select Courses") # sidebar title
 
 # DATA *****************************************************************************************************************
