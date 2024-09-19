@@ -3,7 +3,8 @@ import pandas as pd
 import plotly.express as px
 
 # DISPLAY **************************************************************************************************************
-st.markdown('<p style="font-weight:bold; font-size:22px;">Which Degree Best Suits You? </p>', unsafe_allow_html=True) # title
+st.markdown('<p style="font-weight:bold; font-size:22px;">Which Degree Best Suits You?</p>', unsafe_allow_html=True) # title
+st.write("open sidebar")
 st.sidebar.header("Select Courses") # sidebar title
 
 # DATA *****************************************************************************************************************
