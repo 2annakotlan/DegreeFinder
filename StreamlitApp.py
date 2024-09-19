@@ -132,7 +132,7 @@ def display_list(degree_matches_dict, degree_des, url_dict):
     for degree, percent in degree_matches_dict.items():  # for every degree...
         url = url_dict.get(degree, "No link available")  # url = get method to retrieve the urls
         tooltip = degree_des.get(degree, "No description available")  # hover = get method to retrieve the description
-        formatted_list.append(f'<span style="font-size: 12px;">{percent:.2f}%: <a href="{url}" title="{tooltip}">{degree}</a></span>')
+        formatted_list.append(f'<span style="font-size: 10px;">{percent:.2f}%: <a href="{url}" title="{tooltip}">{degree}</a></span>')
 
     st.markdown('<br>'.join(formatted_list), unsafe_allow_html=True)
     return formatted_list
