@@ -119,10 +119,10 @@ def display_bar_chart(degree_matches_df, title):
 
 col1, col2 = st.columns(2) # creating two columns
 with col1:
-    if major_degree_matches_df: # don't have an empty graph
+    if not major_degree_matches_df.empty: # don't have an empty graph
         display_bar_chart(major_degree_matches_df, 'Major Match')
 with col2:
-    if minor_degree_matches_df: # don't have an empty graph
+    if not minor_degree_matches_df.empty: # don't have an empty graph
         display_bar_chart(minor_degree_matches_df, 'Minor Match')
 
 # LIST *****************************************************************************************************************
@@ -139,11 +139,11 @@ def display_list(degree_matches_dict, degree_des, url_dict):
 
 col1, col2 = st.columns(2) # creating two columns
 with col1:
-    if major_degree_matches_df: # don't have an empty list
+    if not major_degree_matches_df.empty: # don't have an empty list
         st.write("Major Match")
         display_list(major_degree_matches_dict, major_degree_des, major_url_dict)
 with col2:
-    if minor_degree_matches_df: # don't have an empty list
+    if not minor_degree_matches_df.empty: # don't have an empty list
         st.write("Minor Match")
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
