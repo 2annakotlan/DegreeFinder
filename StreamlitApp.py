@@ -117,8 +117,8 @@ def display_bar_chart(degree_matches_df, title):
     bar_chart = st.plotly_chart(bar_chart, use_container_width = True) # display bar chart (expanding to fill the full width)
     return bar_chart
 
-with st.expander("Major and Minor Matches"):
-    col1, col2 = st.columns(2)
+with st.container():
+    col1, col2 = st.columns([1, 1])  # Adjust width as needed
     with col1:
         if not major_degree_matches_df.empty:
             display_bar_chart(major_degree_matches_df, 'Major Match')
@@ -138,8 +138,9 @@ def display_list(degree_matches_dict, degree_des, url_dict):
     st.markdown('<br>'.join(formatted_list), unsafe_allow_html=True)
     return formatted_list
 
-with st.expander("Major and Minor Lists"):
-    col1, col2 = st.columns(2)
+# Create a container for the lists
+with st.container():
+    col1, col2 = st.columns([1, 1])  # Adjust width as needed
     with col1:
         display_list(major_degree_matches_dict, major_degree_des, major_url_dict)
     with col2:
