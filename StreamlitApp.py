@@ -148,4 +148,5 @@ with col2:
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
 # DISPLAY **************************************************************************************************************
+st.write("")
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
