@@ -142,11 +142,12 @@ with col1:
     if not major_degree_matches_df.empty: # don't have an empty list
         st.markdown('<p style="font-weight:bold;">Major Match</p>', unsafe_allow_html=True)
         display_list(major_degree_matches_dict, major_degree_des, major_url_dict)
+        st.write("")
 with col2:
     if not minor_degree_matches_df.empty: # don't have an empty list
         st.markdown('<p style="font-weight:bold;">Minor Match</p>', unsafe_allow_html=True)
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
+        st.write("")
 
 # DISPLAY **************************************************************************************************************
-st.write("")
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
