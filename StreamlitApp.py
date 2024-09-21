@@ -57,14 +57,29 @@ if selected_filter_type == "class":
 # initialize session state for all courses
 if 'checked_boxes' not in st.session_state: st.session_state.checked_boxes = {course: False for course in course_des}
 
+import streamlit as st
+
+# Set custom CSS for font size
+st.markdown(
+    """
+    <style>
+    .checkbox-label {
+        font-size: 10px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 # Display checkboxes only for filtered (displayed) courses, retaining their state
 for course in displayed_course_des:
-    st.sidebar.markdown(f"<span style='font-size: 10px;'>{course}</span>", unsafe_allow_html=True)
     st.session_state.checked_boxes[course] = st.sidebar.checkbox(
-        label='',  # Empty label for checkbox
-        help=displayed_course_des[course],  # Tooltip for course description
-        value=st.session_state.checked_boxes.get(course, False)  # Maintain previous checked state
+        label=f'<span class="checkbox-label">{course}</span>',  # text for the checkbox with custom font size
+        help=displayed_course_des[course],  # tooltip for course description
+        value=st.session_state.checked_boxes.get(course, False),
+        unsafe_allow_html=True  # Allow HTML in the checkbox label
     )
+
 
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked] # list of checked courses
 
