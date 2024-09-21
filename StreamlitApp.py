@@ -62,7 +62,8 @@ for course in displayed_course_des:
     st.session_state.checked_boxes[course] = st.sidebar.checkbox(
         label=f"<span style='font-size: 10px;'>{course}</span>", # text for the checkbox
         help=displayed_course_des[course], # tooltip for course description
-        value=st.session_state.checked_boxes.get(course, False)) # maintain previous checked state
+        value=st.session_state.checked_boxes.get(course, False), # maintain previous checked state
+        unsafe_allow_html=True) # allow HTML rendering
 
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked] # list of checked courses
 
