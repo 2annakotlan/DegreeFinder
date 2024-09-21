@@ -59,9 +59,11 @@ if 'checked_boxes' not in st.session_state: st.session_state.checked_boxes = {co
 
 # Display checkboxes only for filtered (displayed) courses, retaining their state
 for course in displayed_course_des:
-    label = f"<span style='font-size: 20px;'>{course}</span>"  # Change font size here
+    # Use st.markdown to set the label with styling
+    label = f"<span style='font-size: 20px;'>{course}</span>"
+    st.sidebar.markdown(label, unsafe_allow_html=True)  # Render the styled label
     st.session_state.checked_boxes[course] = st.sidebar.checkbox(
-        label=label,  # Use the styled label
+        label='',  # Set label to empty since we're using markdown
         help=displayed_course_des[course],  # Tooltip for course description
         value=st.session_state.checked_boxes.get(course, False)  # Maintain previous checked state
     )
