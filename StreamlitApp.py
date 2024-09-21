@@ -62,13 +62,13 @@ for course in displayed_course_des:
     # Render the label using markdown
     st.sidebar.markdown(f"<span style='font-size: 10px;'>{course}</span>", unsafe_allow_html=True)
     
-    # Create the checkbox
+    # Create the checkbox with a unique key
     st.session_state.checked_boxes[course] = st.sidebar.checkbox(
         label="",  # no label needed here since we rendered it above
         help=displayed_course_des[course],  # tooltip for course description
-        value=st.session_state.checked_boxes.get(course, False)  # maintain previous checked state
+        value=st.session_state.checked_boxes.get(course, False),  # maintain previous checked state
+        key=course  # use the course name as a unique key
     )
-
 
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked] # list of checked courses
 
