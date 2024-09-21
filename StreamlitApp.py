@@ -64,7 +64,7 @@ st.markdown(
     """
     <style>
     .stCheckbox label {
-        font-size: 10px;
+        font-size: 8px;
     }
     </style>
     """,
