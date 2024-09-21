@@ -57,12 +57,14 @@ if selected_filter_type == "class":
 # initialize session state for all courses
 if 'checked_boxes' not in st.session_state: st.session_state.checked_boxes = {course: False for course in course_des}
 
-# display checkboxes only for filtered (displayed) courses, retaining their state
+# Display checkboxes only for filtered (displayed) courses, retaining their state
 for course in displayed_course_des:
+    label = f"<span style='font-size: 10px;'>{course}</span>"  # HTML for label
     st.session_state.checked_boxes[course] = st.sidebar.checkbox(
-        label=course, # text for the checkbox
-        help=displayed_course_des[course], # tooltip for course description
-        value=st.session_state.checked_boxes.get(course, False)) # maintain previous checked state
+        label=label,  # Use HTML formatted label
+        help=displayed_course_des[course],  # Tooltip for course description
+        value=st.session_state.checked_boxes.get(course, False)  # Maintain previous checked state
+    )
 
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked] # list of checked courses
 
