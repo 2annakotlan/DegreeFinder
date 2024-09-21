@@ -59,8 +59,6 @@ if 'checked_boxes' not in st.session_state: st.session_state.checked_boxes = {co
 
 import streamlit as st
 
-import streamlit as st
-
 # Set custom CSS for font size
 st.markdown(
     """
@@ -80,7 +78,6 @@ for course in displayed_course_des:
         help=displayed_course_des[course],  # tooltip for course description
         value=st.session_state.checked_boxes.get(course, False)  # maintain previous checked state
     )
-
 
 
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked] # list of checked courses
