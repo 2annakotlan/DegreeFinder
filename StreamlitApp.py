@@ -33,24 +33,22 @@ from CourseAZLinks import courseaz_department_dict
 if 'checked_boxes' not in st.session_state:
     st.session_state.checked_boxes = {}
 
-# group by department (class code)
+# Group courses by department (class code)
 courses_by_department = defaultdict(list)
 for course, desc in course_des.items():
     starting_letters = re.match(r"([A-Za-z\s]+)\d+", course).group(1).strip()
     courses_by_department[starting_letters].append((course, desc))
 
-# sort courses_by_department by department name from courseaz_department_dict
-sorted_departments = sorted(courses_by_department.items(), key=lambda x: courseaz_department_dict.get(x[0], x[0]))
-
-# collapsible sidebar
-for dept, courses in sorted(sorted_departments):
-    department_name = courseaz_department_dict.get(dept, dept)
+# Collapsible sidebar
+for dept, courses in courses_by_department.items():  # Keep the original order
+    department_name = courseaz_department_dict.get(dept, dept)  # Get department name
     with st.sidebar.expander(department_name, expanded=False):
         for course, desc in courses:
             st.session_state.checked_boxes[course] = st.checkbox(
-                label=course,  # text for the checkbox
-                value=st.session_state.checked_boxes.get(course, False), # maintain the checkbox state
-                help=desc)  # tooltip for course description
+                label=f"{course} ",  # Added a space for separation
+                value=st.session_state.checked_boxes.get(course, False),  # Maintain the checkbox state
+                help=desc  # Tooltip for course description
+            )
 
 # list of checked courses
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked]  # list of checked courses
