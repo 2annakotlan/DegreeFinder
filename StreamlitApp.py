@@ -42,7 +42,7 @@ for course, desc in course_des.items():
 # Collapsible sidebar
 for dept, courses in courses_by_department.items():  # Keep the original order
     department_name = courseaz_department_dict.get(dept, dept)  # Get department name
-    with st.sidebar.expander(department_name, expanded=True):
+    with st.sidebar.expander(department_name, expanded=False):
         for course, desc in courses:
             st.session_state.checked_boxes[course] = st.checkbox(
                 label=f"{course} ",  # Added a space for separation
