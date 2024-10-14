@@ -7,8 +7,9 @@ import re
 # DISPLAY **************************************************************************************************************
 st.title("Which Degree Best Suits You?") # title
 st.markdown(
-    '<span title="degree suggestions determined by a percentage match function (calculated by how closely the user’s chosen classes of interest (selected via checkboxes) align with Bentley University's degree requirements)">Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!</span>',
-    unsafe_allow_html=True) # message with tooltip
+    '<span title="Degree suggestions are determined by a percentage match function, calculated by how closely the user’s chosen classes of interest (selected via checkboxes) align with Bentley University\'s degree requirements.">Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!</span>',
+    unsafe_allow_html=True
+)
 st.sidebar.header("Select Courses") # sidebar title
 
 # DATA *****************************************************************************************************************
