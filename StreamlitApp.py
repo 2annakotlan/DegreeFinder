@@ -6,7 +6,9 @@ import re
 
 # DISPLAY **************************************************************************************************************
 st.title("Which Degree Best Suits You?") # title
-st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!")
+st.markdown(
+    '<span title="degree suggestions determined by a percentage match function (calculating how closely the user’s chosen classes of interest (selected via checkboxes) align with degree requirements)">Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!</span>',
+    unsafe_allow_html=True) # message with tooltip
 st.sidebar.header("Select Courses") # sidebar title
 
 # DATA *****************************************************************************************************************
@@ -134,5 +136,4 @@ with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
 
 # DISPLAY **************************************************************************************************************
-st.write("This tool provides degree suggestions by calculating how closely the user’s chosen classes of interest (selected via checkboxes) align with degree requirements.")
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
