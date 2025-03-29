@@ -134,8 +134,8 @@ with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
     
 # GOOGLE SHEETS ********************************************************************************************************
-if st.button("Click Me"):
-    st.write("Button clicked!")
+if st.button("Submit Results"):
+    st.write(major_degree_matches_df)
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
