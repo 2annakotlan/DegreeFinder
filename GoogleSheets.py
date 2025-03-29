@@ -9,4 +9,4 @@ def add_columns(sheet_name):
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees (columns), flattened
     webscraped_degrees = list(major_url_dict.keys()) # current webscraped degrees
     new_degrees = [degree for degree in webscraped_degrees if degree not in spreadsheet_degrees] # degrees in webscraped degrees not included in spreadsheet degrees
-    sheet.values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1", valueInputOption="RAW", body={"values": [new_degrees]}).execute() # adding new degrees as columns
+    sheet.values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1", valueInputOption="RAW", body={"values": [new_degrees]}).execute() # adding new degrees as columns
