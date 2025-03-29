@@ -6,19 +6,24 @@ from DegreeLinksDict import major_url_dict, minor_url_dict
 spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
 
+import streamlit as st
+
 def add_column(sheet_name):
     try:
-        # Get the current values in column A (range "A:A" should work but avoid the colon if possible)
-        values = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A1:A").execute()).get('values', [])
+        # Get the current values in column A, starting from the first row to the last populated row
+        values = (service.spreadsheets().values().get(
+            spreadsheetId=spreadsheetId, range=f"{sheet_name}!A1:A1000"
+        ).execute()).get('values', [])
+        
         next_row = len(values) + 1  # Calculate the next row number
 
-        # Display the row number (optional for debugging)
+        # Display the next row number for debugging
         st.write(f"Next row: {next_row}")
         
-        # Update the next row in column A
+        # Update the next row in column A with a new value
         service.spreadsheets().values().update(
             spreadsheetId=spreadsheetId, 
-            range=f"{sheet_name}!A{next_row}:A", 
+            range=f"{sheet_name}!A{next_row}",  # Specify only the specific row (no range)
             valueInputOption="RAW", 
             body={"values": [['Test']]}
         ).execute()
