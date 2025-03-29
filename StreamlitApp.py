@@ -33,13 +33,13 @@ from CourseAZLinks import courseaz_department_dict
 if 'checked_boxes' not in st.session_state:
     st.session_state.checked_boxes = {}
 
-# Group courses by department (class code)
+# group courses by department (class code)
 courses_by_department = defaultdict(list)
 for course, desc in course_des.items():
     starting_letters = re.match(r"([A-Za-z\s]+)\d+", course).group(1).strip()
     courses_by_department[starting_letters].append((course, desc))
 
-# Collapsible sidebar
+# collapsible sidebar
 for dept, courses in courses_by_department.items():  # Keep the original order
     department_name = courseaz_department_dict.get(dept, dept)  # Get department name
     with st.sidebar.expander(department_name, expanded=False):
@@ -132,6 +132,10 @@ with col1:
     display_list(major_degree_matches_dict, major_degree_des, major_url_dict)
 with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
+    
+# GOOGLE SHEETS ********************************************************************************************************
+if st.button("Click Me"):
+    st.write("Button clicked!")
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
