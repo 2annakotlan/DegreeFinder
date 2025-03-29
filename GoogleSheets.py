@@ -12,8 +12,8 @@ def get_sheets_service():
 service = get_sheets_service()
 
 def append_row_by_headers(data, sheet_name="Sheet1"):
-    result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute()
-    column_headers = result.get('values', [])[0] if 'values' in result else []
+    column_headers = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get('values', [])[0]
     values = [data.get(header, "") for header in column_headers]
-    append_row(values, sheet_name)
+    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=sheet_name, valueInputOption="RAW", body={"values": [values]}).execute()
+
 
