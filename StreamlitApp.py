@@ -137,7 +137,7 @@ with col2:
 from GoogleSheets import append_row
 
 if st.button("Submit Results"):
-    st.write(major_degree_matches_df)
+    st.write(major_degree_matches_dict)
     #append_row(["Anna", "Sarah", "Lucy"])
 
 # DISPLAY **************************************************************************************************************
