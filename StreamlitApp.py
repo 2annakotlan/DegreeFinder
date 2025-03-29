@@ -138,6 +138,7 @@ from GoogleSheets import *
 
 if st.button("Submit Results"):
     add_columns("Major Predictions")
+    st.success("DONE")
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
