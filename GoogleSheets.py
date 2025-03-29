@@ -6,7 +6,7 @@ from DegreeLinksDict import major_url_dict, minor_url_dict
 spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
 
-def add_column(sheet_name, values):
+def add_column(sheet_name):
     service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A{len(values) + 1}:A, valueInputOption="RAW", body={"values": [['Test']]}).execute()
 
 '''
