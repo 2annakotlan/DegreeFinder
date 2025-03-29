@@ -8,7 +8,6 @@ service = build('sheets', 'v4', credentials=Credentials.from_service_account_inf
 
 def add_column(sheet_name):
     values = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute()).get('values', []) 
-    st.write(values)
     next_column = len(values[0])
     st.write(next_column)
     #service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!A{next_row}:A", valueInputOption="RAW", body={"values": [['Test']]}, ).execute() # update next column
