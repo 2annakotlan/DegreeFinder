@@ -137,7 +137,7 @@ with col2:
 from GoogleSheets import *
 
 if st.button("Submit Results"):
-    add_column("Major Predictions")
+    add_column("MajorPredictions")
     st.success("DONE")
 
 # DISPLAY **************************************************************************************************************
