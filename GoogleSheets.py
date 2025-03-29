@@ -13,5 +13,5 @@ def update_columns(major_url_dict):
     sheet_name = service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()['sheets'][0]['properties']['title']
     existing_cols = set(get_existing_columns())
     new_cols = sorted(set(major_url_dict.keys()) - existing_cols)
-    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1', valueInputOption='RAW', body={'values': [new_cols]}).execute()
+    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:{len(existing_cols) + len(new_cols)}', valueInputOption='RAW', body={'values': [existing_cols + new_cols]}).execute()
     st.write("done")
