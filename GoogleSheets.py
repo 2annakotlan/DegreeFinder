@@ -10,17 +10,7 @@ def get_sheets_service():
     return build('sheets', 'v4', credentials=credentials)
 
 service = get_sheets_service()
-def append_row(values, sheet_name="Sheet1"):
-    try:
-        service.spreadsheets().values().append(
-            spreadsheetId=spreadsheetId,
-            range=sheet_name,
-            valueInputOption="RAW",
-            body={"values": [values]},
-        ).execute()
-    except Exception as e:
-        print(f"Error occurred: {e}")
-'''
+
 def append_row(values, sheet_name="Sheet1"):
     service.spreadsheets().values().append(
         spreadsheetId=spreadsheetId,
@@ -28,7 +18,6 @@ def append_row(values, sheet_name="Sheet1"):
         valueInputOption="RAW",
         body={"values": [values]},
     ).execute()
-'''
 
 '''
 def read_values(sheet_name, column_name, row_name):
