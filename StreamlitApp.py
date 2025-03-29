@@ -135,7 +135,8 @@ with col2:
     
 # GOOGLE SHEETS ********************************************************************************************************
 if st.button("Submit Results"):
-    st.write(major_degree_matches_df)
+    #st.write(major_degree_matches_df)
+    append_row(["Anna", "Sarah", "Lucy"])
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
