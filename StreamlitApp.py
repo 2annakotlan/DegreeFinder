@@ -137,7 +137,7 @@ with col2:
 from GoogleSheets import *
 
 if st.button("Submit Results"):
-    update_columns(major_url_dict)
+    st.write(get_columns('Major Predictions'))
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
