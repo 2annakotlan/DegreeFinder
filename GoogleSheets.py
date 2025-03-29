@@ -5,13 +5,9 @@ from google.oauth2.service_account import Credentials
 spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
 
-def get_existing_columns():
-    sheet_name = service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()['sheets'][0]['properties']['title']
-    return service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', [[]])[0]
+def get_columns(sheet_name):
+    values = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', [])
+    return (values)
 
-def update_columns(major_url_dict):
-    sheet_name = service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()['sheets'][0]['properties']['title']
-    existing_cols = set(get_existing_columns())
-    new_cols = sorted(set(major_url_dict.keys()) - existing_cols)
-    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:{len(existing_cols) + len(new_cols)}', valueInputOption='RAW', body={'values': [existing_cols + new_cols]}).execute()
-    st.write("done")
+
+    
