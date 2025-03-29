@@ -11,13 +11,11 @@ def get_sheets_service():
 
 service = get_sheets_service()
 
-def append_row(values, sheet_name="Sheet1"):
-    service.spreadsheets().values().append(
-        spreadsheetId=spreadsheetId,
-        range=sheet_name,
-        valueInputOption="RAW",
-        body={"values": [values]},
-    ).execute()
+def append_row_by_headers(data, sheet_name="Sheet1"):
+    result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute()
+    column_headers = result.get('values', [])[0] if 'values' in result else []
+    values = [data.get(header, "") for header in column_headers]
+    append_row(values, sheet_name)
 
 '''
 def read_values(sheet_name, column_name, row_name):
