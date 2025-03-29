@@ -11,6 +11,16 @@ def get_sheets_service():
 
 service = get_sheets_service()
 
+def append_row(values, sheet_name="Sheet1"):
+    service.spreadsheets().values().append(
+        spreadsheetId=spreadsheetId,
+        range=sheet_name,
+        valueInputOption="RAW",
+        body={"values": [values]},
+    ).execute()
+
+
+'''
 def read_values(sheet_name, column_name, row_name):
     result = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=sheet_name).execute()
     data = result.get('values', [])
@@ -73,4 +83,5 @@ def delete_column(sheet_name, column_name):
     column_index = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute().get('values', [[]])[0].index(column_name)
     sheet_id = next(sheet['properties']['sheetId'] for sheet in service.spreadsheets().get(spreadsheetId=spreadsheetId).execute()['sheets'] if sheet['properties']['title'] == sheet_name)
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={'requests': [{"deleteDimension": {"range": {"sheetId": sheet_id, "dimension": "COLUMNS", "startIndex": column_index, "endIndex": column_index + 1}}}]}).execute()
+    '''
 
