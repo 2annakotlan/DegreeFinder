@@ -134,7 +134,7 @@ with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
     
 # GOOGLE SHEETS ********************************************************************************************************
-from GoogleSheets import append_row
+#from GoogleSheets import append_row
 
 if st.button("Submit Results"):
     st.write(major_degree_matches_dict)
