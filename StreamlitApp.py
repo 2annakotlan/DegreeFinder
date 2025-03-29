@@ -134,11 +134,10 @@ with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
     
 # GOOGLE SHEETS ********************************************************************************************************
-from GoogleSheets import append_row_by_headers
+from GoogleSheets import *
 
 if st.button("Submit Results"):
-    #st.write(major_degree_matches_dict)
-    append_row_by_headers(major_degree_matches_dict)
+    update_columns(major_url_dict)
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
