@@ -6,7 +6,8 @@ from DegreeLinksDict import major_url_dict, minor_url_dict
 spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
 
-def add_new_degrees(sheet_name, sheet_id):  
+# UPDATE SPREADSHEET WITH NEW DEGREE OFFERINGS *************************************************************************
+def update_columns(sheet_name, sheet_id): 
     # Finding New Degrees 
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
     webscraped_degrees = list(major_url_dict.keys()) # current webscraped degrees
@@ -18,3 +19,9 @@ def add_new_degrees(sheet_name, sheet_id):
         letter_column_needed = chr(64 + num_column_needed) if num_column_needed <= 26 else chr(64 + (num_column_needed - 1) // 26) + chr(65 + (num_column_needed - 1) % 26) # letter equivalent of next_column_number
         service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{letter_column_needed}1", valueInputOption="RAW", body={"values": [new_degrees]}).execute() # fill in new column
+
+# DISPLAY **************************************************************************************************************
+
+ def append_row(sheet_name, values):
+     service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=sheet_name, valueInputOption="RAW", body={"values": [values]},).execute()
+
