@@ -137,8 +137,8 @@ from GoogleSheets import update_columns, append_data
 
 if st.button("Submit Results"):
     #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
-    append_data(data = major_degree_matches_dict, sheet_name = "MajorPredictions") # append results
-    st.success("DONE") 
+    append_data(data = major_degree_matches_dict, id = 'B10006278', sheet_name = "MajorPredictions") # append results
+    st.success("Submitted") 
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
