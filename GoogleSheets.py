@@ -2,6 +2,7 @@ import streamlit as st
 from googleapiclient.discovery import build 
 from google.oauth2.service_account import Credentials 
 from DegreeLinksDict import major_url_dict, minor_url_dict   
+from 
 
 spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
@@ -22,6 +23,7 @@ def update_columns(sheet_name, sheet_id):
 
 # DISPLAY **************************************************************************************************************
 
- def append_row(sheet_name, values):
-     service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=sheet_name, valueInputOption="RAW", body={"values": [values]},).execute()
-
+def append_data(data, sheet_name):
+    spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
+    values = [data.get(degree, '') for degree in spreadsheet_degrees] # create row to append, matching dictionary keys to headers
+    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=sheet_name, valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
