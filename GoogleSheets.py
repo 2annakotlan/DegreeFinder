@@ -11,8 +11,17 @@ def add_column(sheet_name):
     #next_column_number = len(values[0]) + 1
     #next_column_letter = chr(64 + next_column_number) if next_column_number <= 26 else chr(64 + (next_column_number - 1) // 26) + chr(65 + (next_column_number - 1) % 26)
     #requests = [{"updateSheetProperties": {"properties": {"sheetId": 0}, "fields": "gridProperties.columnCount", "gridProperties": {"columnCount": next_column_number}}}]
-    
-    requests = [{"updateSheetProperties": {"properties": {"sheetId": 0}, "fields": "gridProperties.columnCount", "gridProperties": {"columnCount": 37}}}]
+    requests = [{
+    "updateSheetProperties": {
+        "properties": {
+            "sheetId": 0,
+            "gridProperties": {
+                "columnCount": 37
+            }
+        },
+        "fields": "gridProperties.columnCount"
+    }
+}]
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": requests}).execute()
     #service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{next_column_letter}1:{next_column_letter}", valueInputOption="RAW", body={"values": [['New Column']]}).execute()
 
