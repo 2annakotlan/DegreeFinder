@@ -23,7 +23,7 @@ def add_column(sheet_name, sheet_id):
         service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
         #service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{next_column_letter}1", valueInputOption="RAW", body={"values": [['Test']]}).execute() # fill in new column
 '''
-
+ 
 def add_column(sheet_name, sheet_id): 
     # Finding New Degrees 
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
