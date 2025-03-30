@@ -14,7 +14,7 @@ def add_column(sheet_name):
     requests = [{"updateSheetProperties": {"properties": {"sheetId": 0}, "fields": "gridProperties.columnCount", "gridProperties": {"columnCount": next_column_number}}}]
     st.write(requests)
 
-    #service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": requests}).execute()
+    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": requests}).execute()
     #service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{next_column_letter}1:{next_column_letter}", valueInputOption="RAW", body={"values": [['New Column']]}).execute()
 
 '''
