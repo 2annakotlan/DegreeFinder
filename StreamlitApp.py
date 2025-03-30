@@ -40,15 +40,14 @@ for course, desc in course_des.items():
     courses_by_department[starting_letters].append((course, desc))
 
 # collapsible sidebar
-for dept, courses in courses_by_department.items():  # Keep the original order
-    department_name = courseaz_department_dict.get(dept, dept)  # Get department name
+for dept, courses in courses_by_department.items():  # keep the original order
+    department_name = courseaz_department_dict.get(dept, dept)  # get department name
     with st.sidebar.expander(department_name, expanded=False):
         for course, desc in courses:
             st.session_state.checked_boxes[course] = st.checkbox(
-                label=f"{course} ",  # Added a space for separation
-                value=st.session_state.checked_boxes.get(course, False),  # Maintain the checkbox state
-                help=desc  # Tooltip for course description
-            )
+                label=f"{course} ",  # added a space for separation
+                value=st.session_state.checked_boxes.get(course, False),  # maintain the checkbox state
+                help=desc)  # tooltip for course description
 
 # list of checked courses
 checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked]  # list of checked courses
@@ -138,6 +137,7 @@ from GoogleSheets import *
 
 if st.button("Submit Results"):
     #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) # uncomment this out when new degrees are offered
+    append_data(data = major_degree_matches_dict, sheet_name = "MajorPredictions") # append results
     st.success("DONE")
 
 # DISPLAY **************************************************************************************************************
