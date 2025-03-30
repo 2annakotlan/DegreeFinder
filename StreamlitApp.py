@@ -133,11 +133,11 @@ with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
     
 # GOOGLE SHEETS ********************************************************************************************************
-from GoogleSheets import *
+from GoogleSheets import update_columns, append_data
 
 if st.button("Submit Results"):
-    update_columns(sheet_name = "MajorPredictions", sheet_id = 0) # uncomment this out when new degrees are offered
-    #append_data(data = major_degree_matches_dict, sheet_name = "MajorPredictions") # append results
+    #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
+    append_data(data = major_degree_matches_dict, sheet_name = "MajorPredictions") # append results
     st.success("DONE") 
 
 # DISPLAY **************************************************************************************************************
