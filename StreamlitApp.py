@@ -137,7 +137,7 @@ with col2:
 from GoogleSheets import *
 
 if st.button("Submit Results"):
-    #update_new_degrees(sheet_name = "MajorPredictions", sheet_id = 0) # uncomment this out when new degrees are offered
+    #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) # uncomment this out when new degrees are offered
     st.success("DONE")
 
 # DISPLAY **************************************************************************************************************
