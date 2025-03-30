@@ -133,7 +133,7 @@ with col2:
     display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
     
 # GOOGLE SHEETS ********************************************************************************************************
-from GoogleSheets import update_columns
+from GoogleSheets import *
 
 if st.button("Submit Results"):
     update_columns(sheet_name = "MajorPredictions", sheet_id = 0) # uncomment this out when new degrees are offered
