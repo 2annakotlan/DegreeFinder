@@ -33,5 +33,5 @@ def add_column(sheet_name, sheet_id):
     if num_new_degrees > 0: # if there are new degrees that need to be added...
         num_column_needed = len(spreadsheet_degrees) + num_new_degrees # number of columns needed
         st.write(num_column_needed)
-        #service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
+        service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
 
