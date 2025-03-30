@@ -9,7 +9,7 @@ service = build('sheets', 'v4', credentials=Credentials.from_service_account_inf
 
 # UPDATE SPREADSHEET WITH NEW DEGREE OFFERINGS *************************************************************************
 def update_columns(sheet_name, sheet_id): 
-    # Finding New Degrees 
+    # Finding New Degrees  
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
     webscraped_degrees = list(major_url_dict.keys()) # current webscraped degrees
     new_degrees = [degree for degree in webscraped_degrees if degree not in spreadsheet_degrees] # unique webscraped degrees 
