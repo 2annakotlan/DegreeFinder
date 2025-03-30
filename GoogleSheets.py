@@ -28,10 +28,12 @@ def add_column(sheet_name, sheet_id):
     # Finding New Degrees 
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
     num_new_degrees = 2
+    num_current_degrees = len(spreadsheet_degrees)
+    st.write(num_current_degrees)
 
     # Adding New Degrees to Column Headers
-    if num_new_degrees > 0: # if there are new degrees that need to be added...
-        num_column_needed = len(spreadsheet_degrees[0]) + num_new_degrees # number of columns needed
-        st.write(num_column_needed)
-        service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
+    #if num_new_degrees > 0: # if there are new degrees that need to be added...
+        #num_column_needed = len(spreadsheet_degrees[0]) + num_new_degrees # number of columns needed
+        #st.write(num_column_needed)
+        #service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
 
