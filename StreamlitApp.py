@@ -136,8 +136,18 @@ with col2:
 from GoogleSheets import update_columns, append_data
 
 if st.button("Submit Results"):
+    id = st.text_input("Student ID:")
+    #major = st.text_input("Declared Major (if applicable):")
+    #minor = st.text_input("Declared Minor (if applicable):")
+    
+    # update spreadsheet with new degree offerings 
     #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
-    append_data(data = major_degree_matches_dict, id = 'B10006278', sheet_name = "MajorPredictions") # append results
+    #update_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
+
+    # update spreadsheet with results
+    append_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
+    append_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
+    
     st.success("Submitted") 
 
 # DISPLAY **************************************************************************************************************
