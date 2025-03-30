@@ -138,7 +138,7 @@ from GoogleSheets import update_columns, append_data
 if st.button("Submit Results"):
     #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) # uncomment this out when new degrees are offered
     append_data(data = major_degree_matches_dict, sheet_name = "MajorPredictions") # append results
-    st.success("DONE")
+    st.success("DONE") 
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
