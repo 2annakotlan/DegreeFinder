@@ -6,32 +6,15 @@ from DegreeLinksDict import major_url_dict, minor_url_dict
 spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
 
-'''
 def add_column(sheet_name, sheet_id): 
     # Finding New Degrees 
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
     webscraped_degrees = list(major_url_dict.keys()) # current webscraped degrees
     new_degrees = [degree for degree in webscraped_degrees if degree not in spreadsheet_degrees] # unique webscraped degrees 
-    num_new_degrees = len(new_degrees) # number of new degrees that need to be added
-    st.write(num_new_degrees)
-    st.write(new_degrees)
 
     # Adding New Degrees to Column Headers
-    if num_new_degrees > 0: # if there are new degrees that need to be added...
-        num_column_needed = len(spreadsheet_degrees[0]) + num_new_degrees # number of columns needed
+    if len(new_degrees) > 0: # if there are new degrees that need to be added...
+        num_column_needed = len(spreadsheet_degrees) + len(new_degrees) # number of columns needed
         letter_column_needed = chr(64 + num_column_needed) if num_column_needed <= 26 else chr(64 + (num_column_needed - 1) // 26) + chr(65 + (num_column_needed - 1) % 26) # letter equivalent of next_column_number
         service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
         #service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{next_column_letter}1", valueInputOption="RAW", body={"values": [['Test']]}).execute() # fill in new column
-'''
- 
-def add_column(sheet_name, sheet_id): 
-    # Finding New Degrees 
-    spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
-    num_new_degrees = 2
-
-    # Adding New Degrees to Column Headers
-    if num_new_degrees > 0: # if there are new degrees that need to be added...
-        num_column_needed = len(spreadsheet_degrees) + num_new_degrees # number of columns needed
-        st.write(num_column_needed)
-        service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
-
