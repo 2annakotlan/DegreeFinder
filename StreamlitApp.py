@@ -140,15 +140,16 @@ if st.button("Submit Results"):
     #major = st.text_input("Declared Major (if applicable):")
     #minor = st.text_input("Declared Minor (if applicable):")
     
-    # update spreadsheet with new degree offerings 
-    #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
-    #update_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
-
-    # update spreadsheet with results
-    append_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
-    append_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
+    if id:
+        # update spreadsheet with new degree offerings 
+        #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
+        #update_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
     
-    st.success("Submitted") 
+        # update spreadsheet with results
+        append_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
+        append_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
+        
+        st.success("Submitted") 
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
