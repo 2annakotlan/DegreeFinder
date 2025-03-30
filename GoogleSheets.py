@@ -23,5 +23,5 @@ def update_columns(sheet_name, sheet_id):
 # UPDATE SPREADSHEET WITH RESUlts **************************************************************************************
 def append_data(data, sheet_name):
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
-    values = [data.get(degree, 0) for degree in spreadsheet_degrees]] # create row to append, matching dictionary keys to headers
+    values = [data.get(degree, 0) for degree in spreadsheet_degrees]]] # create row to append, matching dictionary keys to headers
     service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}", valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
