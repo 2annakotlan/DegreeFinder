@@ -21,8 +21,7 @@ def update_columns(sheet_name, sheet_id):
         service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{letter_column_needed}1", valueInputOption="RAW", body={"values": [new_degrees]}).execute() # fill in new column
 
-# DISPLAY **************************************************************************************************************
-
+# UPDATE SPREADSHEET WITH RESUlts **************************************************************************************
 def append_data(data, sheet_name):
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
     values = [data.get(degree, '') for degree in spreadsheet_degrees] # create row to append, matching dictionary keys to headers
