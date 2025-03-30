@@ -7,12 +7,22 @@ spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
 
 def add_column(sheet_name, sheet_id): 
-    values = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute()).get('values', []) # read first row
-    next_column_number = len(values[0]) + 1 # length of first row + 1
-    next_column_letter = chr(64 + next_column_number) if next_column_number <= 26 else chr(64 + (next_column_number - 1) // 26) + chr(65 + (next_column_number - 1) % 26) # letter equivalent of next_column_number
-    service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": next_column_number}}, "fields": "gridProperties.columnCount"}}]}).execute() # add a empty column
-    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{next_column_letter}1", valueInputOption="RAW", body={"values": [['Test']]}).execute() # fill in new column
-    
+    # Finding New Degrees 
+    spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
+    webscraped_degrees = list(major_url_dict.keys()) # current webscraped degrees
+    new_degrees = [degree for degree in webscraped_degrees if degree not in spreadsheet_degrees] # unique webscraped degrees 
+    num_new_degrees = len(new_degrees) # number of new degrees that need to be added
+    st.write(num_new_degrees)
+    st.write(new_degrees)
+
+    # Adding New Degrees to Column Headers
+    #if num_new_degrees > 0: # if there are new degrees that need to be added...
+        #next_column_number = len(spreadsheet_degrees[0]) + num_new_degrees # number of columns needed
+        #next_column_letter = chr(64 + next_column_number) if next_column_number <= 26 else chr(64 + (next_column_number - 1) // 26) + chr(65 + (next_column_number - 1) % 26) # letter equivalent of next_column_number
+        #service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": next_column_number}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert an empty column
+        #service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{next_column_letter}1", valueInputOption="RAW", body={"values": [['Test']]}).execute() # fill in new column
+
+
 '''
 def add_columns(sheet_name):
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees (columns), flattened
