@@ -9,8 +9,9 @@ service = build('sheets', 'v4', credentials=Credentials.from_service_account_inf
 def add_column(sheet_name, sheet_id): 
     values = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f"{sheet_name}!1:1").execute()).get('values', []) # read first row
     next_column_number = len(values[0]) + 1 # length of first row + 1
+    next_column_letter = chr(64 + next_column_number) if next_column_number <= 26 else chr(64 + (next_column_number - 1) // 26) + chr(65 + (next_column_number - 1) % 26) # letter equivalent of next_column_number
     service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": next_column_number}}, "fields": "gridProperties.columnCount"}}]}).execute() # add a empty column
-    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!AK1", valueInputOption="RAW", body={"values": [['Test']]}).execute() # fill in new column
+    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{next_column_letter}1", valueInputOption="RAW", body={"values": [['Test']]}).execute() # fill in new column
     
 '''
 def add_columns(sheet_name):
