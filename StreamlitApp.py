@@ -24,12 +24,12 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY **************************************************************************************************************
-st.title("Degree Finder") # title
-st.header("Log In") # login
-#st.title("Which Degree Best Suits You?") # title
-#st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
-
+header_placeholder = st.empty() # placeholder to hide the header post submission
 form_placeholder = st.empty() # placeholder to hide the form post submission
+
+st.title("Degree Finder") # title
+with header_placeholder:
+    st.header("Log In") # login
 
 with form_placeholder:
     with st.form(key='login_form'):
@@ -42,8 +42,10 @@ if submitted and not id:
     st.error("Student ID Required") # error message 
 
 if submitted and id:
+    header_placeholder.empty() # remove form placeholder after submission
     form_placeholder.empty() # remove form placeholder after submission
     st.sidebar.header("Select Courses")  # sidebar title
+    st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
     
     # CHECKBOXES ***********************************************************************************************************
     # initialize session state for checked boxes
