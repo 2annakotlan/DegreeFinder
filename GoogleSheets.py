@@ -38,4 +38,4 @@ def append_student_data(id, major_1, major_2, minor_1, minor_2):
     values[spreadsheet_columns.index('Declared Major 2')] = major_2  # put major 2 in correct position
     values[spreadsheet_columns.index('Declared Minor 1')] = minor_1  # put minor 1 in correct position
     values[spreadsheet_columns.index('Declared Minor 2')] = minor_2  # put minor 2 in correct position
-    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=StudentInfo, valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
+    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range="StudentInfo", valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
