@@ -38,14 +38,16 @@ def display_login_page():
         major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
         minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
         submitted = st.form_submit_button("Next") # submit
+
+    st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
     
     if submitted and not id:
         st.error("Student ID Required") # error message 
 
     if submitted and id:
         append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets   
-
-    st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
+        st.session_state.page = 'display_analytics_page'
+        st.rerun()
 
 # DISPLAY ANALYTICS PAGE ***********************************************************************************************
 def display_analytics_page():
