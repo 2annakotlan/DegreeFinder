@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 from googleapiclient.discovery import build 
 from google.oauth2.service_account import Credentials 
-from DegreeLinksDict import major_url_dict, minor_url_dict  
+#from DegreeLinksDict import major_url_dict, minor_url_dict  
 
 spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
@@ -30,9 +30,11 @@ def append_prediction_data(data, id, sheet_name):
     service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}", valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
 
 # UPDATE SPREADSHEET WITH STUDENT DATA *********************************************************************************
-def append_student_data(data, id, sheet_name):
-    spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
-    values = [data.get(degree, 0) for degree in spreadsheet_degrees] # create row to append - in correct position, matching dictionary keys to headers
+def append_student_data(data, id, major_1, major_2, minor_1, minor_2):
+    spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=StudentInfo!1:1).execute().get('values', []))[0] # spreadsheet columns
     values[spreadsheet_degrees.index('Student ID')] = id  # put id in correct position
-    values[spreadsheet_degrees.index('Timestamp')] = datetime.now().strftime('%Y-%m-%d %H:%M:%S') # set current timestamp in correct position
-    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}", valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
+    values[spreadsheet_degrees.index('Declared Major 1')] = major_1  # put major 1 in correct position
+    values[spreadsheet_degrees.index('Declared Major 2')] = major_2  # put major 2 in correct position
+    values[spreadsheet_degrees.index('Declared Minor 1')] = minor_1  # put minor 1 in correct position
+    values[spreadsheet_degrees.index('Declared Minor 2')] = minor_2  # put minor 2 in correct position
+    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=StudentInfo, valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
