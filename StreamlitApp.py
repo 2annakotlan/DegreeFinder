@@ -39,13 +39,15 @@ with form_placeholder:
         id = st.text_input("Student ID:") # login
         major_1, major_2 = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor_1, minor_2 = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
+        st.write(major_1)
+        st.write(major_2)
         submitted = st.form_submit_button("Next") # submit
 
 if submitted and not id:
     st.error("Student ID Required") # error message 
 
 if submitted and id:
-    append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets
+    #append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets
     header_placeholder.empty() # remove form placeholder after submission
     form_placeholder.empty() # remove form placeholder after submission
     st.sidebar.header("Select Courses")  # sidebar title
