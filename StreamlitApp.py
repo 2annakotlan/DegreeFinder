@@ -45,9 +45,8 @@ def display_login_page():
         st.error("Student ID Required") # error message 
 
     if submitted and id:
-        append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets   
+        # append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets   
         st.session_state.page = 'display_analytics_page'
-        st.rerun()
 
 # DISPLAY ANALYTICS PAGE ***********************************************************************************************
 def display_analytics_page():
