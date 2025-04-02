@@ -4,32 +4,35 @@ import streamlit as st
 import pandas as pd 
 import re   
 
+# DATA *****************************************************************************************************************
+# degree requirements dictionary
+from DegreeReq import major_degree_req, minor_degree_req 
+degree_req = {**major_degree_req, **minor_degree_req}
+    
+# degree descriptions dictionary
+from DegreeDescriptions import major_degree_des, minor_degree_des
+    
+# degree link dictionary
+from DegreeLinksDict import major_url_dict, minor_url_dict
+    
+# descriptions dictionary (that count towards degree requirements)
+from CourseDescriptions import course_des # all course descriptions
+degree_req_courses_list = set([course for degree in degree_req.values() for course in degree]) # all unique courses in degree_req
+course_des = {course: description for course, description in course_des.items() if course in degree_req_courses_list} # course_des without courses that don't exist in degree_req
+    
+# a list of departments
+from CourseAZLinks import courseaz_department_dict
+
 # DISPLAY **************************************************************************************************************
 st.title("Which Degree Best Suits You?") # title
 st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
+
 id = st.text_input("Student ID:") # login
+major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections = 2) # major
+minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections = 2) # minor
+
 if id:
-    
     st.sidebar.header("Select Courses") # sidebar title
-    
-    # DATA *****************************************************************************************************************
-    # degree requirements dictionary
-    from DegreeReq import major_degree_req, minor_degree_req 
-    degree_req = {**major_degree_req, **minor_degree_req}
-    
-    # degree descriptions dictionary
-    from DegreeDescriptions import major_degree_des, minor_degree_des
-    
-    # degree link dictionary
-    from DegreeLinksDict import major_url_dict, minor_url_dict
-    
-    # descriptions dictionary (that count towards degree requirements)
-    from CourseDescriptions import course_des # all course descriptions
-    degree_req_courses_list = set([course for degree in degree_req.values() for course in degree]) # all unique courses in degree_req
-    course_des = {course: description for course, description in course_des.items() if course in degree_req_courses_list} # course_des without courses that don't exist in degree_req
-    
-    # a list of departments
-    from CourseAZLinks import courseaz_department_dict
     
     # CHECKBOXES ***********************************************************************************************************
     # initialize session state for checked boxes
@@ -139,8 +142,6 @@ if id:
     from GoogleSheets import update_columns, append_data
     
     if st.button("Submit Results"):
-        #major = st.text_input("Declared Major (if applicable):")
-        #minor = st.text_input("Declared Minor (if applicable):")
         
         # update spreadsheet with new degree offerings 
         #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
