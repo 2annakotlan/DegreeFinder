@@ -27,6 +27,9 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY **************************************************************************************************************
+a, b = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
+st.write(a)
+
 st.title("Degree Finder") # title 
 
 header_placeholder = st.empty() # placeholder to hide the header post submission
