@@ -26,6 +26,14 @@ course_des = {course: description for course, description in course_des.items() 
 # a list of departments
 from CourseAZLinks import courseaz_department_dict
 
+# PAGE ROUTING *********************************************************************************************************
+if 'page' not in st.session_state:
+    st.session_state.page = 'display_login_page'
+if st.session_state.page == 'display_login_page':
+    display_login_page()
+if st.session_state.page == 'display_analytics_page':
+    display_analytics_page()
+
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():
     st.title("Degree Finder") # title 
@@ -50,8 +58,6 @@ def display_login_page():
 
 # DISPLAY ANALYTICS PAGE ***********************************************************************************************
 def display_analytics_page():
-    
-    # DISPLAY ***************************************************************************************************************
     st.title("Degree Finder") # title 
     st.sidebar.header("Select Courses")  # sidebar title
     st.header("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
