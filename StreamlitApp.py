@@ -40,8 +40,6 @@ with form_placeholder:
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
         major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
-        st.write(major_1)
-        st.write(major_2)
         minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
         submitted = st.form_submit_button("Next") # submit
 
@@ -49,6 +47,8 @@ if submitted and not id:
     st.error("Student ID Required") # error message 
 
 if submitted and id:
+    st.write(major_1)
+    st.write(major_2)
     #append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets
     header_placeholder.empty() # remove form placeholder after submission
     form_placeholder.empty() # remove form placeholder after submission
