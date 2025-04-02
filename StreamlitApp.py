@@ -26,32 +26,35 @@ course_des = {course: description for course, description in course_des.items() 
 # a list of departments
 from CourseAZLinks import courseaz_department_dict
 
-# DISPLAY **************************************************************************************************************
-st.title("Degree Finder") # title 
-
-header_placeholder = st.empty() # placeholder to hide the header post submission
-with header_placeholder:
+# DISPLAY LOGIN PAGE ***************************************************************************************************
+def display_login_page():
+    st.title("Degree Finder") # title 
     st.header("Log In") # login
+    
+    with form_placeholder:
+        with st.form(key='login_form'):
+            id = st.text_input("Student ID:") # login
+            major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
+            minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
+            major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
+            minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
+            submitted = st.form_submit_button("Next") # submit
+    
+    if submitted and not id:
+        st.error("Student ID Required") # error message 
 
-form_placeholder = st.empty() # placeholder to hide the form post submission
-with form_placeholder:
-    with st.form(key='login_form'):
-        id = st.text_input("Student ID:") # login
-        major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
-        minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
-        major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
-        minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
-        submitted = st.form_submit_button("Next") # submit
+    if submitted and id:
+        append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets
 
-if submitted and not id:
-    st.error("Student ID Required") # error message 
+    st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
 
-if submitted and id:
-    append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets
-    header_placeholder.empty() # remove form placeholder after submission
-    form_placeholder.empty() # remove form placeholder after submission
+# DISPLAY ANALYTICS PAGE ***********************************************************************************************
+def display_analytics_page():
+    
+    # DISPLAY ***************************************************************************************************************
+    st.title("Degree Finder") # title 
     st.sidebar.header("Select Courses")  # sidebar title
-    st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
+    st.header("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
     
     # CHECKBOXES ***********************************************************************************************************
     # initialize session state for checked boxes
@@ -170,6 +173,6 @@ if submitted and id:
             
         st.success("Submitted") 
 
-# DISPLAY **************************************************************************************************************
-st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
+    # DISPLAY **************************************************************************************************************
+    st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
 
