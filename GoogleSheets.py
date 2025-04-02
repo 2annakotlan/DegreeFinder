@@ -8,7 +8,7 @@ spreadsheetId = '16xVJWtgcHnHUFU9kbQ8N_QHb4mXX57KiN3WyDooApTY'
 service = build('sheets', 'v4', credentials=Credentials.from_service_account_info(st.secrets["google_service_account"], scopes=['https://www.googleapis.com/auth/spreadsheets']))
 
 # UPDATE SPREADSHEET WITH NEW DEGREE OFFERINGS *************************************************************************
-def update_columns(sheet_name, sheet_id): 
+def update_prediction_columns(sheet_name, sheet_id): 
     # Finding New Degrees  
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # current spreadsheet degrees 
     webscraped_degrees = list(major_url_dict.keys()) # current webscraped degrees
@@ -22,7 +22,7 @@ def update_columns(sheet_name, sheet_id):
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{letter_column_needed}1", valueInputOption="RAW", body={"values": [new_degrees]}).execute() # fill in new column
 
 # UPDATE SPREADSHEET WITH RESUlts **************************************************************************************
-def append_data(data, id, sheet_name):
+def append_prediction_data(data, id, sheet_name):
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
     values = [data.get(degree, 0) for degree in spreadsheet_degrees] # create row to append - in correct position, matching dictionary keys to headers
     values[spreadsheet_degrees.index('Student ID')] = id  # put id in correct position
