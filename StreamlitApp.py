@@ -27,14 +27,14 @@ from CourseAZLinks import courseaz_department_dict
 st.title("Which Degree Best Suits You?") # title
 st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
 
-form_placeholder = st.empty()  # placeholder to hide the form post submission
+form_placeholder = st.empty() # placeholder to hide the form post submission
 
 with form_placeholder:
     with st.form(key='login_form'):
-        id = st.text_input("Student ID:")  # login
+        id = st.text_input("Student ID:") # login
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
-        submitted = st.form_submit_button("Next") # required student id to submit
+        submitted = st.form_submit_button("Next", disabled=not id) # required student id to submit
 
 if submitted:
     form_placeholder.empty() # remove form placeholder after submission
