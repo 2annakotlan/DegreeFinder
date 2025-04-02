@@ -32,6 +32,7 @@ def append_prediction_data(data, id, sheet_name):
 # UPDATE SPREADSHEET WITH STUDENT DATA *********************************************************************************
 def append_student_data(id, major_1, major_2, minor_1, minor_2):
     spreadsheet_columns = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range="StudentInfo!1:1").execute().get('values', []))[0] # spreadsheet columns
+    values = [''] * len(spreadsheet_columns) # placeholder to be replaced with data
     values[spreadsheet_columns.index('Student ID')] = id  # put id in correct position
     values[spreadsheet_columns.index('Declared Major 1')] = major_1  # put major 1 in correct position
     values[spreadsheet_columns.index('Declared Major 2')] = major_2  # put major 2 in correct position
