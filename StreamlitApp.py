@@ -25,7 +25,7 @@ from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY **************************************************************************************************************
 st.title("Degree Finder") # title
-st.write("Log In") # login
+st.header("Log In") # login
 #st.title("Which Degree Best Suits You?") # title
 #st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
 
