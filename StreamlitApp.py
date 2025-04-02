@@ -38,8 +38,8 @@ with form_placeholder:
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
         submitted = st.form_submit_button("Next") # submit
 
-    if submitted and not id:
-        st.error("Student ID Required") # error message 
+if submitted and not id:
+    st.error("Student ID Required") # error message 
 
 if submitted and id:
     form_placeholder.empty() # remove form placeholder after submission
