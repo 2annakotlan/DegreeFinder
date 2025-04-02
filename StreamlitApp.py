@@ -36,12 +36,14 @@ with form_placeholder:
         id = st.text_input("Student ID:") # login
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
-        if id:
-            submitted = st.form_submit_button("Next") # required to submit id
+        submitted = st.form_submit_button("Next") # submit
 
-if submitted:
+    if submitted and not id:
+        st.error("Student ID Required") # error message 
+
+if submitted and id:
     form_placeholder.empty() # remove form placeholder after submission
-    st.sidebar.header("Select Courses") # sidebar title
+    st.sidebar.header("Select Courses")  # sidebar title
     
     # CHECKBOXES ***********************************************************************************************************
     # initialize session state for checked boxes
