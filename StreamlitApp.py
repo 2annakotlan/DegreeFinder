@@ -31,7 +31,9 @@ with st.form(key='login_form'):
     id = st.text_input("Student ID:")  # login
     major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2)  # major
     minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2)  # minor
+    submitted = st.form_submit_button("Submit")
 
+'''
     st.sidebar.header("Select Courses") # sidebar title
     
     # CHECKBOXES ***********************************************************************************************************
@@ -155,3 +157,4 @@ with st.form(key='login_form'):
 
 # DISPLAY **************************************************************************************************************
 st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
+'''
