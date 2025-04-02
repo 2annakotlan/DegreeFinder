@@ -27,7 +27,7 @@ from CourseAZLinks import courseaz_department_dict
 st.title("Which Degree Best Suits You?") # title
 st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
 
-#form_placeholder = st.empty()  # placeholder to hide the form post submission
+form_placeholder = st.empty()  # placeholder to hide the form post submission
 
 with form_placeholder:
     with st.form(key='login_form'):
@@ -37,7 +37,7 @@ with form_placeholder:
         submitted = st.form_submit_button("Next", disabled = not id) # required student id to submit
 
 if submitted:
-    #form_placeholder.empty() # remove form placeholder after submission
+    form_placeholder.empty() # remove form placeholder after submission
     st.sidebar.header("Select Courses") # sidebar title
     
     # CHECKBOXES ***********************************************************************************************************
