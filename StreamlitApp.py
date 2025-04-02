@@ -5,7 +5,7 @@ import pandas as pd
 import re    
 
 # DATA *****************************************************************************************************************
-# google sheets
+# google sheets functions
 from GoogleSheets import update_prediction_columns, append_prediction_data, append_student_data
 
 # degree requirements dictionary
@@ -48,6 +48,7 @@ if submitted and id:
     #append_student_data(id, major_1, major_2, minor_1, minor_2)
     st.write(major)
     st.write(minor)
+    print(type(minor))
     header_placeholder.empty() # remove form placeholder after submission
     form_placeholder.empty() # remove form placeholder after submission
     st.sidebar.header("Select Courses")  # sidebar title
