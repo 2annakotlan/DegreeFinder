@@ -21,8 +21,16 @@ def update_prediction_columns(sheet_name, sheet_id):
         service.spreadsheets().batchUpdate(spreadsheetId=spreadsheetId, body={"requests": [{"updateSheetProperties": {"properties": {"sheetId": sheet_id, "gridProperties": {"columnCount": num_column_needed}}, "fields": "gridProperties.columnCount"}}]}).execute() # insert empty column(s)
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{letter_column_needed}1", valueInputOption="RAW", body={"values": [new_degrees]}).execute() # fill in new column
 
-# UPDATE SPREADSHEET WITH RESUlts **************************************************************************************
+# UPDATE SPREADSHEET WITH PREDICTION RESUltS ***************************************************************************
 def append_prediction_data(data, id, sheet_name):
+    spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
+    values = [data.get(degree, 0) for degree in spreadsheet_degrees] # create row to append - in correct position, matching dictionary keys to headers
+    values[spreadsheet_degrees.index('Student ID')] = id  # put id in correct position
+    values[spreadsheet_degrees.index('Timestamp')] = datetime.now().strftime('%Y-%m-%d %H:%M:%S') # set current timestamp in correct position
+    service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}", valueInputOption="RAW", body={"values": [values]}).execute() # fill in row
+
+# UPDATE SPREADSHEET WITH STUDENT DATA *********************************************************************************
+def append_student_data(data, id, sheet_name):
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
     values = [data.get(degree, 0) for degree in spreadsheet_degrees] # create row to append - in correct position, matching dictionary keys to headers
     values[spreadsheet_degrees.index('Student ID')] = id  # put id in correct position
