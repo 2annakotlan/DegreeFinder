@@ -32,6 +32,7 @@ form_placeholder = st.empty() # placeholder to hide the form post submission
 with form_placeholder:
     with st.form(key='login_form'):
         id = st.text_input("Student ID:") # login
+        st.write("Current ID value:", id)
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
         submitted = st.form_submit_button("Next", disabled=not id) # required student id to submit
