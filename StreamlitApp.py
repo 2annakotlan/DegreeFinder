@@ -1,8 +1,8 @@
 from collections import defaultdict
-import plotly.express as px
+import plotly.express as px  
 import streamlit as st
 import pandas as pd 
-import re   
+import re    
 
 # DATA *****************************************************************************************************************
 # degree requirements dictionary
