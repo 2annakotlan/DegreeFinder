@@ -48,7 +48,7 @@ if submitted and id:
     #append_student_data(id, major_1, major_2, minor_1, minor_2)
     st.write(major)
     st.write(minor)
-    print(type(minor))
+    st.write(type(minor))
     header_placeholder.empty() # remove form placeholder after submission
     form_placeholder.empty() # remove form placeholder after submission
     st.sidebar.header("Select Courses")  # sidebar title
