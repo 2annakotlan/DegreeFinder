@@ -152,7 +152,7 @@ if submitted and id:
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
         
     # GOOGLE SHEETS ********************************************************************************************************
-    from GoogleSheets import update_columns, append_data
+    from GoogleSheets import update_prediction_columns, append_prediction_data
 
     if st.button("Submit Results"):
         
