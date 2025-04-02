@@ -5,6 +5,9 @@ import pandas as pd
 import re    
 
 # DATA *****************************************************************************************************************
+# google sheets
+from GoogleSheets import update_prediction_columns, append_prediction_data
+
 # degree requirements dictionary
 from DegreeReq import major_degree_req, minor_degree_req 
 degree_req = {**major_degree_req, **minor_degree_req}
@@ -42,6 +45,9 @@ if submitted and not id:
     st.error("Student ID Required") # error message 
 
 if submitted and id:
+    #append_student_data(id, major_1, major_2, minor_1, minor_2)
+    st.write(major)
+    st.write(minor)
     header_placeholder.empty() # remove form placeholder after submission
     form_placeholder.empty() # remove form placeholder after submission
     st.sidebar.header("Select Courses")  # sidebar title
@@ -152,9 +158,6 @@ if submitted and id:
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
         
     # GOOGLE SHEETS ********************************************************************************************************
-    #from GoogleSheets import update_prediction_columns, append_prediction_data
-    from GoogleSheets import *
-
     if st.button("Submit Results"):
         
         # update spreadsheet with new degree offerings 
