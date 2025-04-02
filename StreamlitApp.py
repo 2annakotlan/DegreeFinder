@@ -47,9 +47,7 @@ if submitted and not id:
     st.error("Student ID Required") # error message 
 
 if submitted and id:
-    st.write(major_1)
-    st.write(major_2)
-    #append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets
+    append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets
     header_placeholder.empty() # remove form placeholder after submission
     form_placeholder.empty() # remove form placeholder after submission
     st.sidebar.header("Select Courses")  # sidebar title
