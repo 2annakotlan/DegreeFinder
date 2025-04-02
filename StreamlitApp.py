@@ -31,14 +31,13 @@ def display_login_page():
     st.title("Degree Finder") # title 
     st.header("Log In") # login
     
-    with form_placeholder:
-        with st.form(key='login_form'):
-            id = st.text_input("Student ID:") # login
-            major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
-            minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
-            major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
-            minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
-            submitted = st.form_submit_button("Next") # submit
+    with st.form(key='login_form'):
+        id = st.text_input("Student ID:") # login
+        major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
+        minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
+        major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
+        minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
+        submitted = st.form_submit_button("Next") # submit
     
     if submitted and not id:
         st.error("Student ID Required") # error message 
