@@ -153,16 +153,16 @@ if submitted and id:
         
     # GOOGLE SHEETS ********************************************************************************************************
     from GoogleSheets import update_columns, append_data
-    
+
     if st.button("Submit Results"):
         
         # update spreadsheet with new degree offerings 
-        #update_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
-        #update_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
+        #update_prediction_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
+        #update_prediction_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
         
         # update spreadsheet with results
-        append_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
-        append_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
+        append_prediction_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
+        append_prediction_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
             
         st.success("Submitted") 
 
