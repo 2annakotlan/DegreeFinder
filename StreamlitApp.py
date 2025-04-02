@@ -24,13 +24,13 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY **************************************************************************************************************
-header_placeholder = st.empty() # placeholder to hide the header post submission
-form_placeholder = st.empty() # placeholder to hide the form post submission
+st.title("Degree Finder") # title 
 
-st.title("Degree Finder") # title
+header_placeholder = st.empty() # placeholder to hide the header post submission
 with header_placeholder:
     st.header("Log In") # login
 
+form_placeholder = st.empty() # placeholder to hide the form post submission
 with form_placeholder:
     with st.form(key='login_form'):
         id = st.text_input("Student ID:") # login
