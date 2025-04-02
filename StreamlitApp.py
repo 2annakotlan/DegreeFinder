@@ -27,9 +27,6 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY **************************************************************************************************************
-a, b = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
-st.write(a)
-
 st.title("Degree Finder") # title 
 
 header_placeholder = st.empty() # placeholder to hide the header post submission
@@ -40,10 +37,12 @@ form_placeholder = st.empty() # placeholder to hide the form post submission
 with form_placeholder:
     with st.form(key='login_form'):
         id = st.text_input("Student ID:") # login
-        major_1, major_2 = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
-        minor_1, minor_2 = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
+        major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
+        minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
+        major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
         st.write(major_1)
         st.write(major_2)
+        minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
         submitted = st.form_submit_button("Next") # submit
 
 if submitted and not id:
