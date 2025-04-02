@@ -27,11 +27,12 @@ from CourseAZLinks import courseaz_department_dict
 st.title("Which Degree Best Suits You?") # title
 st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
 
-id = st.text_input("Student ID:") # login
-major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections = 2) # major
-minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections = 2) # minor
+with st.form(key='login_form'):
+    id = st.text_input("Student ID:")  # login
+    major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2)  # major
+    minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2)  # minor
+    submit_button = st.form_submit_button("Submit")
 
-if id:
     st.sidebar.header("Select Courses") # sidebar title
     
     # CHECKBOXES ***********************************************************************************************************
