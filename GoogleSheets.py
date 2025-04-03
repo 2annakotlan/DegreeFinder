@@ -46,7 +46,7 @@ def append_student_data(id, major_1, major_2, minor_1, minor_2):
     values[spreadsheet_columns.index('Major 1')] = major_1  # put major 1 in correct position
     values[spreadsheet_columns.index('Major 2')] = major_2  # put major 2 in correct position
     values[spreadsheet_columns.index('Minor 1')] = minor_1  # put minor 1 in correct position
-    values[spreadsheet_columns.index('Minor 2')] = minor_2  # put minor 2 in correct position
+    values[spreadsheet_columns.index('Minor 2')] = minor_2  # put minor 2 in correct position 
 
     if row_number == None: 
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range="StudentInfo", valueInputOption="RAW", body={"values": [values]}).execute() # append data in next row
