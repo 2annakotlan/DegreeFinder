@@ -44,7 +44,7 @@ def display_login_page():
 
     if submitted and id:
         st.session_state["id"] = id # save in state session
-        # append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets   
+        append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets   
         st.session_state.page = 'display_analytics_page'
         st.rerun()
 
