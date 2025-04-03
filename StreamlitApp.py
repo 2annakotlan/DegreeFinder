@@ -55,7 +55,7 @@ def display_login_page():
 # DISPLAY ANALYTICS PAGE ***********************************************************************************************
 def display_analytics_page():
     major_accuracy_average, minor_accuracy_average = get_average_scores()
-    st.title(f"Degree Finder {major_accuracy_average}% Accuracy) # title 
+    st.title(f"Degree Finder {major_accuracy_average}% Accuracy) # title    
     st.sidebar.header("Select Courses")  # sidebar title
     st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
     
