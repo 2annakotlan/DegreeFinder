@@ -172,7 +172,7 @@ def display_analytics_page():
             append_prediction_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
     
             # accuracy
-            append_student_accuracy(id = id)
+            st.write(append_student_accuracy(id = id))
             st.success("Submitted") 
 
     # DISPLAY **************************************************************************************************************
