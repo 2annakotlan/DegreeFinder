@@ -52,3 +52,23 @@ def append_student_data(id, major_1, major_2, minor_1, minor_2):
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range="StudentInfo", valueInputOption="RAW", body={"values": [values]}).execute() # append data in next row
     else: 
         service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"StudentInfo!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
+
+# UPDATE SPREADSHEET WITH ACCURACY *************************************************************************************
+def append_student_accuracy(id):
+    id_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!A2:A').execute().get('values', [])
+    row_number = next((row_number for row_number, row in enumerate(id_column, start=2) if row and row[0] == id), None) # find row number where id already exists
+
+    df = pd.DataFrame((values := service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo').execute().get('values', []))[1:], columns=values[0])
+    major_1 = df.loc[df.iloc[:, 0] == row_number, "Major_1"].values[0]
+    st.write(major_1)
+
+    '''
+    spreadsheet_columns = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range="StudentInfo!1:1").execute().get('values', []))[0] # spreadsheet columns
+    values = [''] * len(spreadsheet_columns) # placeholder to be replaced with data
+    values[spreadsheet_columns.index('Major 1 Accuracy')] = major_1_accuracy  # put major 1 accuracy in correct position
+    values[spreadsheet_columns.index('Major 2 Accuracy')] = major_2_accuracy  # put major 2 accuracyin correct position
+    values[spreadsheet_columns.index('Minor 1 Accuracy')] = minor_1_accuracy  # put minor 1 accuracy in correct position
+    values[spreadsheet_columns.index('Minor 2 Accuracy')] = minor_2_accuracy  # put minor 2 accuracy in correct position 
+
+    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"StudentInfo!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
+    '''
