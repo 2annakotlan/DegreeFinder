@@ -59,7 +59,7 @@ def append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_raw_scor
         service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"StudentInfo!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
 
 # GET AVERAGE SCORES ***************************************************************************************************
-def get_average_scores():
+def get_average_scores():    
     # retrieve data from Google Sheets
     major_1_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!C2:C').execute().get('values', [])
     major_2_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!E2:E').execute().get('values', [])
