@@ -163,7 +163,7 @@ def display_analytics_page():
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
         
     # GOOGLE SHEETS ********************************************************************************************************
-    if major_degree_matches_dict or minor_degree_matches_dict >= 1: 
+    if len(major_degree_matches_dict) >= 1 or len(minor_degree_matches_dict) >= 1:
         if st.button("Submit Results"):
 
             # retrieve stored information 
