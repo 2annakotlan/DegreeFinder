@@ -59,8 +59,11 @@ def append_student_accuracy(id):
     row_number = next((row_number for row_number, row in enumerate(id_column, start=2) if row and row[0] == id), None) # find row number where id already exists
 
     df = pd.DataFrame((values := service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo').execute().get('values', []))[1:], columns=values[0])
-    major_1 = df.loc[df.iloc[:, 0] == row_number, "Major_1"].values[0]
-    return major_1
+    major_1 = df.loc[df.iloc[:, 0] == row_number, "Major 1"].values[0]
+    major_2 = df.loc[df.iloc[:, 0] == row_number, "Major 2"].values[0]
+    minor_1 = df.loc[df.iloc[:, 0] == row_number, "Minor 1"].values[0]
+    minor_2 = df.loc[df.iloc[:, 0] == row_number, "Minor 2"].values[0]
+    return(major_1)
 
     '''
     spreadsheet_columns = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range="StudentInfo!1:1").execute().get('values', []))[0] # spreadsheet columns
