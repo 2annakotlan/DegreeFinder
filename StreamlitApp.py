@@ -27,12 +27,7 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
-def display_login_page():
-    cis_minor = degree_req.get('Minor in Computer Information Systems')
-    st.write("Computer Information Systems Minor Requirements:")
-    for course in cis_minor:
-        st.write(course)
-    
+def display_login_page():    
     st.title("Degree Finder") # title 
     st.header("Log In") # login
     
