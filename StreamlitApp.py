@@ -133,7 +133,7 @@ def display_analytics_page():
         bar_chart.update_layout(coloraxis_showscale = False) # hide color scale bar
         bar_chart.update_layout(xaxis_tickangle=90)  # make the x-axis labels verticle
         bar_chart.update_traces(hovertemplate='%{x}: %{y:.2f}%') # hover to show degree: percentage match %
-        bar_chart.update_layout(annotations=[dict(x=0.5, y=1.05, text=title, showarrow=False, font=dict(size=20), align='center', hovertext="This is the chart title: " + title, hoverlabel=dict(bgcolor="white", font_size=12, font_family="Arial"))])
+        st.markdown(f'<p style="font-weight:bold;" title="This is the chart title: {title}">{title}</p>', unsafe_allow_html=True)
         bar_chart = st.plotly_chart(bar_chart, use_container_width = True) # display bar chart (expanding to fill the full width)
         return bar_chart
     
