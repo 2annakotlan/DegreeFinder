@@ -44,7 +44,11 @@ def display_login_page():
 
     if submitted and id:
         st.session_state["id"] = id # save in state session
-        append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2) # google sheets   
+        st.session_state["major_1"] = major_1 # save in state session
+        st.session_state["major_2"] = major_2 # save in state session
+        st.session_state["minor_1"] = minor_1 # save in state session
+        st.session_state["minor_2"] = minor_2 # save in state session
+        
         st.session_state.page = 'display_analytics_page'
         st.rerun()
 
@@ -159,20 +163,33 @@ def display_analytics_page():
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
         
     # GOOGLE SHEETS ********************************************************************************************************
-    if major_degree_matches_dict or minor_degree_matches_dict: 
+    if major_degree_matches_dict or minor_degree_matches_dict >= 1: 
         if st.button("Submit Results"):
+
+            # retrieve stored information 
+            id = st.session_state.get("id") 
+            major_1 = st.session_state.get("major_1") 
+            major_2 = st.session_state.get("major_2") 
+            minor_1 = st.session_state.get("minor_1") 
+            minor_2 = st.session_state.get("minor_2") 
+
+            # retrieve raw scores (if degree not found, return 0)
+            major_1_raw_score = major_degree_matches_dict.get("major_1", 0)  
+            major_2_raw_score = major_degree_matches_dict.get("major_2", 0)  
+            minor_1_raw_score = minor_degree_matches_dict.get("minor_1", 0)  
+            minor_2_raw_score = minor_degree_matches_dict.get("minor_2", 0)  
             
-            # update spreadsheet with new degree offerings 
+            # update prediction spreadsheet with new degree offerings 
             #update_prediction_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
             #update_prediction_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
             
-            # update spreadsheet with results
-            id = st.session_state.get("id") # retrieve stored id
+            # update prediction spreadsheet with results
             append_prediction_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
             append_prediction_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
-    
-            # accuracy
-            st.write(append_student_accuracy(id = id))
+
+            # update student data spreadsheet with results
+            append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2, major_1_raw_score = major_1_raw_score, major_2_raw_score = major_2_raw_score, minor_1_raw_score = minor_1_raw_score, minor_2_raw_score = minor_2_raw_score) # google sheets   
+
             st.success("Submitted") 
 
     # DISPLAY **************************************************************************************************************
