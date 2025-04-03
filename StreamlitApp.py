@@ -54,7 +54,8 @@ def display_login_page():
 
 # DISPLAY ANALYTICS PAGE ***********************************************************************************************
 def display_analytics_page():
-    st.title("Degree Finder") # title 
+    major_accuracy_average, minor_accuracy_average = get_average_scores()
+    st.title(f"Degree Finder {major_accuracy_average}% Accuracy) # title 
     st.sidebar.header("Select Courses")  # sidebar title
     st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
     
@@ -174,10 +175,10 @@ def display_analytics_page():
             minor_2 = st.session_state.get("minor_2") 
 
             # retrieve raw scores (if degree not listed, return 0; if degree not inputted, N/A)
-            major_1_raw_score = major_degree_matches_dict.get(major_1, 0) if major_1 else 'N/A'
-            major_2_raw_score = major_degree_matches_dict.get(major_2, 0) if major_2 else 'N/A'
-            minor_1_raw_score = minor_degree_matches_dict.get(minor_1, 0) if minor_1 else 'N/A'
-            minor_2_raw_score = minor_degree_matches_dict.get(minor_2, 0) if minor_2 else 'N/A'
+            major_1_raw_score = major_degree_matches_dict.get(major_1, 0) if major_1 else pd.NA
+            major_2_raw_score = major_degree_matches_dict.get(major_2, 0) if major_2 else pd.NA
+            minor_1_raw_score = minor_degree_matches_dict.get(minor_1, 0) if minor_1 else pd.NA
+            minor_2_raw_score = minor_degree_matches_dict.get(minor_2, 0) if minor_2 else pd.NA
             
             # update prediction spreadsheet with new degree offerings 
             #update_prediction_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
@@ -189,7 +190,7 @@ def display_analytics_page():
 
             # update student data spreadsheet with results
             append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2, major_1_raw_score = major_1_raw_score, major_2_raw_score = major_2_raw_score, minor_1_raw_score = minor_1_raw_score, minor_2_raw_score = minor_2_raw_score) # google sheets   
-
+            
             st.success("Submitted") 
 
     # DISPLAY **************************************************************************************************************
