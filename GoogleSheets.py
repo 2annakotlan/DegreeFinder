@@ -30,10 +30,8 @@ def append_prediction_data(data, id, sheet_name):
     values[spreadsheet_degrees.index('Student ID')] = id  # put id in correct position
 
     if row_number == None: 
-        st.write("None")
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}", valueInputOption="RAW", body={"values": [values]}).execute() # append data in next row
     else: 
-        st.write(row_number)
         service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
 
 # UPDATE SPREADSHEET WITH STUDENT DATA *********************************************************************************
