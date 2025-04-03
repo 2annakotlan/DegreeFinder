@@ -28,8 +28,10 @@ from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():
-    cs = [value for value in minor_degree_req.values() if 'Minor in Computer Information Systems' in value]
-    st.write(cs)
+    cis_minor = minor_degree_req.get('Minor in Computer Information Systems')
+    print("Computer Information Systems Minor Requirements:")
+    for course in cis_minor:
+        print(course)
     
     st.title("Degree Finder") # title 
     st.header("Log In") # login
