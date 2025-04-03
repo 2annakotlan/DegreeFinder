@@ -1,5 +1,5 @@
+import numpy as np
 import streamlit as st
-from datetime import datetime
 from googleapiclient.discovery import build 
 from google.oauth2.service_account import Credentials 
 
@@ -57,3 +57,25 @@ def append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_raw_scor
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range="StudentInfo", valueInputOption="RAW", body={"values": [values]}).execute() # append data in next row
     else: 
         service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"StudentInfo!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
+
+# GET AVERAGE SCORES ***************************************************************************************************
+def get_average_scores():
+    # retrieve data from Google Sheets
+    major_1_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!C2:C').execute().get('values', [])
+    major_2_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!E2:E').execute().get('values', [])
+    minor_1_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!G2:G').execute().get('values', [])
+    minor_2_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!I2:I').execute().get('values', [])
+
+    # flatten and convert values to float
+    major_1_data = [float(val[0]) for val in major_1_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
+    major_2_data = [float(val[0]) for val in major_2_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
+    minor_1_data = [float(val[0]) for val in minor_1_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
+    minor_2_data = [float(val[0]) for val in minor_2_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
+
+    # compute average while ignoring NaN values
+    major_accuracy_average = np.nanmean(major_1_data + major_2_data)
+    minor_accuracy_average = np.nanmean(minor_1_data + minor_2_data)
+
+    return major_accuracy_average, minor_accuracy_average
+
+    
