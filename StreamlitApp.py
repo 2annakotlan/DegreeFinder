@@ -28,7 +28,7 @@ from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():
-    cis_minor = minor_degree_req.get('Minor in Computer Information Systems')
+    cis_minor = degree_req.get('Minor in Computer Information Systems')
     st.write("Computer Information Systems Minor Requirements:")
     for course in cis_minor:
         st.write(course)
