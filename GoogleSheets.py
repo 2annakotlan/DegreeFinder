@@ -35,7 +35,7 @@ def append_prediction_data(data, id, sheet_name):
         service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
 
 # UPDATE SPREADSHEET WITH STUDENT DATA *********************************************************************************
-def append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_raw_score, major_2_raw_score, minor_1_raw_score, minor_2_raw_score):
+def append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_scaled_score, major_2_scaled_score, minor_1_scaled_score, minor_2_scaled_score):
     id_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!A2:A').execute().get('values', [])
     row_number = next((row_number for row_number, row in enumerate(id_column, start=2) if row and row[0] == id), None) # find row number where id already exists
     
@@ -48,10 +48,10 @@ def append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_raw_scor
     values[spreadsheet_columns.index('Minor 1')] = minor_1  # put minor 1 in correct position
     values[spreadsheet_columns.index('Minor 2')] = minor_2  # put minor 2 in correct position 
 
-    values[spreadsheet_columns.index('Major 1 Accuracy')] = major_1_raw_score  # put major 1 accuracy in correct position
-    values[spreadsheet_columns.index('Major 2 Accuracy')] = major_2_raw_score  # put major 2 accuracy in correct position
-    values[spreadsheet_columns.index('Minor 1 Accuracy')] = minor_1_raw_score  # put minor 1 accuracy in correct position
-    values[spreadsheet_columns.index('Minor 2 Accuracy')] = minor_2_raw_score  # put minor 2 accuracy in correct position 
+    values[spreadsheet_columns.index('Major 1 Accuracy')] = major_1_scaled_score  # put major 1 accuracy in correct position
+    values[spreadsheet_columns.index('Major 2 Accuracy')] = major_2_scaled_score  # put major 2 accuracy in correct position
+    values[spreadsheet_columns.index('Minor 1 Accuracy')] = minor_1_scaled_score  # put minor 1 accuracy in correct position
+    values[spreadsheet_columns.index('Minor 2 Accuracy')] = minor_2_scaled_score  # put minor 2 accuracy in correct position 
 
     if row_number == None: 
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range="StudentInfo", valueInputOption="RAW", body={"values": [values]}).execute() # append data in next row
