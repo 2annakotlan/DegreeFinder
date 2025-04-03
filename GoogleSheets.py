@@ -28,7 +28,6 @@ def append_prediction_data(data, id, sheet_name):
     spreadsheet_degrees = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range=f'{sheet_name}!1:1').execute().get('values', []))[0] # spreadsheet columns
     values = [data.get(degree, 0) for degree in spreadsheet_degrees] # create row to append - in correct position, matching dictionary keys to headers
     values[spreadsheet_degrees.index('Student ID')] = id  # put id in correct position
-    values[spreadsheet_degrees.index('Timestamp')] = datetime.now().strftime('%Y-%m-%d %H:%M:%S') # set current timestamp in correct position
 
     if row_number == None: 
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range=f"{sheet_name}", valueInputOption="RAW", body={"values": [values]}).execute() # append data in next row
@@ -36,42 +35,25 @@ def append_prediction_data(data, id, sheet_name):
         service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"{sheet_name}!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
 
 # UPDATE SPREADSHEET WITH STUDENT DATA *********************************************************************************
-def append_student_data(id, major_1, major_2, minor_1, minor_2):
+def append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_raw_score, major_2_raw_score, minor_1_raw_score, minor_2_raw_score):
     id_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!A2:A').execute().get('values', [])
     row_number = next((row_number for row_number, row in enumerate(id_column, start=2) if row and row[0] == id), None) # find row number where id already exists
     
     spreadsheet_columns = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range="StudentInfo!1:1").execute().get('values', []))[0] # spreadsheet columns
     values = [''] * len(spreadsheet_columns) # placeholder to be replaced with data
     values[spreadsheet_columns.index('Student ID')] = id  # put id in correct position
+    
     values[spreadsheet_columns.index('Major 1')] = major_1  # put major 1 in correct position
     values[spreadsheet_columns.index('Major 2')] = major_2  # put major 2 in correct position
     values[spreadsheet_columns.index('Minor 1')] = minor_1  # put minor 1 in correct position
     values[spreadsheet_columns.index('Minor 2')] = minor_2  # put minor 2 in correct position 
 
+    values[spreadsheet_columns.index('Major 1 Accuracy')] = major_1_raw_score  # put major 1 accuracy in correct position
+    values[spreadsheet_columns.index('Major 2 Accuracy')] = major_2_raw_score  # put major 2 accuracy in correct position
+    values[spreadsheet_columns.index('Minor 1 Accuracy')] = minor_1_raw_score  # put minor 1 accuracy in correct position
+    values[spreadsheet_columns.index('Minor 2 Accuracy')] = minor_2_raw_score  # put minor 2 accuracy in correct position 
+
     if row_number == None: 
         service.spreadsheets().values().append(spreadsheetId=spreadsheetId, range="StudentInfo", valueInputOption="RAW", body={"values": [values]}).execute() # append data in next row
     else: 
         service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"StudentInfo!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
-
-# UPDATE SPREADSHEET WITH ACCURACY *************************************************************************************
-def append_student_accuracy(id):
-    id_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!A2:A').execute().get('values', [])
-    row_number = next((row_number for row_number, row in enumerate(id_column, start=2) if row and row[0] == id), None) # find row number where id already exists
-
-    df = pd.DataFrame((values := service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo').execute().get('values', []))[1:], columns=values[0])
-    major_1 = df.loc[df.iloc[:, 0] == row_number, "Major 1"].values[0]
-    major_2 = df.loc[df.iloc[:, 0] == row_number, "Major 2"].values[0]
-    minor_1 = df.loc[df.iloc[:, 0] == row_number, "Minor 1"].values[0]
-    minor_2 = df.loc[df.iloc[:, 0] == row_number, "Minor 2"].values[0]
-    return(major_1)
-
-    '''
-    spreadsheet_columns = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range="StudentInfo!1:1").execute().get('values', []))[0] # spreadsheet columns
-    values = [''] * len(spreadsheet_columns) # placeholder to be replaced with data
-    values[spreadsheet_columns.index('Major 1 Accuracy')] = major_1_accuracy  # put major 1 accuracy in correct position
-    values[spreadsheet_columns.index('Major 2 Accuracy')] = major_2_accuracy  # put major 2 accuracyin correct position
-    values[spreadsheet_columns.index('Minor 1 Accuracy')] = minor_1_accuracy  # put minor 1 accuracy in correct position
-    values[spreadsheet_columns.index('Minor 2 Accuracy')] = minor_2_accuracy  # put minor 2 accuracy in correct position 
-
-    service.spreadsheets().values().update(spreadsheetId=spreadsheetId, range=f"StudentInfo!{row_number}:{row_number}", valueInputOption="RAW", body={"values": [values]}).execute() # replace data in specified row
-    '''
