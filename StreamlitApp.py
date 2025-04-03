@@ -54,6 +54,8 @@ def display_login_page():
 
 # DISPLAY ANALYTICS PAGE ***********************************************************************************************
 def display_analytics_page():
+    major_accuracy_average, minor_accuracy_average = get_average_scores() # accuracy scores
+    
     st.title(f"Degree Finder") # title    
     st.sidebar.header("Select Courses")  # sidebar title
     st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
@@ -126,18 +128,15 @@ def display_analytics_page():
         bar_chart = px.bar(degree_matches_df,
                                x = 'Degree', # x-axis
                                y = 'Percent Match', # y-axis
-                               # title = title, # title
+                               title = title, # title
                                color = 'Percent Match',  # gradient based off of percent match column
                                color_continuous_scale = 'Blues') # blue gradient barchart
         bar_chart.update_layout(xaxis_title=None) # hide x-axis label "degree"
         bar_chart.update_layout(coloraxis_showscale = False) # hide color scale bar
         bar_chart.update_layout(xaxis_tickangle=90)  # make the x-axis labels verticle
         bar_chart.update_traces(hovertemplate='%{x}: %{y:.2f}%') # hover to show degree: percentage match %
-        st.markdown(f'<p style="font-weight:bold;" title="{accuracy*100:.2f}% Accuracy">{title}</p>', unsafe_allow_html=True)
         bar_chart = st.plotly_chart(bar_chart, use_container_width = True) # display bar chart (expanding to fill the full width)
         return bar_chart
-    
-    major_accuracy_average, minor_accuracy_average = get_average_scores() # accuracy scores
     
     col1, col2 = st.columns(2) # creating two columns
     with col1:
