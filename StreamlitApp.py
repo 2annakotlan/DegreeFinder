@@ -176,12 +176,16 @@ def display_analytics_page():
             minor_1 = st.session_state.get("minor_1") 
             minor_2 = st.session_state.get("minor_2") 
 
-            # retrieve raw scores (if degree not listed, return 0; if degree not inputted, N/A)
-            major_1_raw_score = major_degree_matches_dict.get(major_1, 0) if major_1 else ""
-            major_2_raw_score = major_degree_matches_dict.get(major_2, 0) if major_2 else ""
-            minor_1_raw_score = minor_degree_matches_dict.get(minor_1, 0) if minor_1 else ""
-            minor_2_raw_score = minor_degree_matches_dict.get(minor_2, 0) if minor_2 else ""
+            # scaling factor
+            major_scale = 1/(max(major_degree_matches_dict.values()))
+            minor_scale = 1/(max(minor_degree_matches_dict.values()))
             
+            # retrieve scores (if degree not listed, return 0; if degree not inputted, N/A) and scale them
+            major_1_scaled_score = major_scale*major_degree_matches_dict.get(major_1, 0) if major_1 else ""
+            major_2_scaled_score = major_scale*major_degree_matches_dict.get(major_2, 0) if major_2 else ""
+            minor_1_scaled_score = minor_scale*minor_degree_matches_dict.get(minor_1, 0) if minor_1 else ""
+            minor_2_scaled_score = minor_scale*minor_degree_matches_dict.get(minor_2, 0) if minor_2 else ""
+
             # update prediction spreadsheet with new degree offerings 
             #update_prediction_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
             #update_prediction_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
@@ -191,7 +195,7 @@ def display_analytics_page():
             append_prediction_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
 
             # update student data spreadsheet with results
-            append_student_data(id = id, major_1 = major_1, major_2 = major_2, minor_1 = minor_1, minor_2 = minor_2, major_1_raw_score = major_1_raw_score, major_2_raw_score = major_2_raw_score, minor_1_raw_score = minor_1_raw_score, minor_2_raw_score = minor_2_raw_score) # google sheets   
+            append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_scaled_score, major_2_scaled_score, minor_1_scaled_score, minor_2_scaled_score)   
             
             st.success("Submitted") 
 
