@@ -159,18 +159,21 @@ def display_analytics_page():
         display_list(minor_degree_matches_dict, minor_degree_des, minor_url_dict)
         
     # GOOGLE SHEETS ********************************************************************************************************
-    if st.button("Submit Results"):
-        
-        # update spreadsheet with new degree offerings 
-        #update_prediction_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
-        #update_prediction_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
-        
-        # update spreadsheet with results
-        id = st.session_state.get("id") # retrieve stored id
-        append_prediction_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
-        append_prediction_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
+    if major_degree_matches_dict or minor_degree_matches_dict: 
+        if st.button("Submit Results"):
             
-        st.success("Submitted") 
+            # update spreadsheet with new degree offerings 
+            #update_prediction_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
+            #update_prediction_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
+            
+            # update spreadsheet with results
+            id = st.session_state.get("id") # retrieve stored id
+            append_prediction_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
+            append_prediction_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
+    
+            # accuracy
+            append_student_accuracy(id = id)
+            st.success("Submitted") 
 
     # DISPLAY **************************************************************************************************************
     st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
