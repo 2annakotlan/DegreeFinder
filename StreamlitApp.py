@@ -121,19 +121,19 @@ def display_analytics_page():
     minor_degree_matches_dict, minor_degree_matches_df = get_degree_match(minor_degree_req)
     
     # BAR CHART ************************************************************************************************************
-    def display_bar_chart(degree_matches_df, title):
+    def display_bar_chart(degree_matches_df, title, accuracy):
         degree_matches_df = degree_matches_df.head(10) # only display the first 10 matches for visual aesthetics
         bar_chart = px.bar(degree_matches_df,
                                x = 'Degree', # x-axis
                                y = 'Percent Match', # y-axis
-                               title = title, # title
+                               # title = title, # title
                                color = 'Percent Match',  # gradient based off of percent match column
                                color_continuous_scale = 'Blues') # blue gradient barchart
         bar_chart.update_layout(xaxis_title=None) # hide x-axis label "degree"
         bar_chart.update_layout(coloraxis_showscale = False) # hide color scale bar
         bar_chart.update_layout(xaxis_tickangle=90)  # make the x-axis labels verticle
         bar_chart.update_traces(hovertemplate='%{x}: %{y:.2f}%') # hover to show degree: percentage match %
-        st.markdown(f'<p style="font-weight:bold;" title="This is the chart title: {title}">{title}</p>', unsafe_allow_html=True)
+        st.markdown(f'<p style="font-weight:bold;" title="{accuracy}% Accuracy">{title}</p>', unsafe_allow_html=True)
         bar_chart = st.plotly_chart(bar_chart, use_container_width = True) # display bar chart (expanding to fill the full width)
         return bar_chart
     
@@ -142,10 +142,10 @@ def display_analytics_page():
     col1, col2 = st.columns(2) # creating two columns
     with col1:
         if not major_degree_matches_df.empty: # don't have an empty graph
-            display_bar_chart(major_degree_matches_df, 'Major Match')
+            display_bar_chart(major_degree_matches_df, 'Major Match', major_accuracy_average)
     with col2:
         if not minor_degree_matches_df.empty: # don't have an empty graph
-            display_bar_chart(minor_degree_matches_df, 'Minor Match')
+            display_bar_chart(minor_degree_matches_df, 'Minor Match', minor_accuracy_average)
     
     # LIST *****************************************************************************************************************
     def display_list(degree_matches_dict, degree_des, url_dict):
