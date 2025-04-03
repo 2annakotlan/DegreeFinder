@@ -60,7 +60,7 @@ def append_student_accuracy(id):
 
     df = pd.DataFrame((values := service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo').execute().get('values', []))[1:], columns=values[0])
     major_1 = df.loc[df.iloc[:, 0] == row_number, "Major_1"].values[0]
-    st.write(major_1)
+    return major_1
 
     '''
     spreadsheet_columns = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range="StudentInfo!1:1").execute().get('values', []))[0] # spreadsheet columns
