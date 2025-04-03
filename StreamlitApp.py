@@ -28,6 +28,8 @@ from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():
+    st.write([value for value in degree_req.values() if 'Minor in Computer Information Systems' in value])
+    
     st.title("Degree Finder") # title 
     st.header("Log In") # login
     
