@@ -66,16 +66,17 @@ def get_average_scores():
     minor_1_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!G2:G').execute().get('values', [])
     minor_2_accuracy_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!I2:I').execute().get('values', [])
 
-    # flatten and convert values to float
-    major_1_data = [float(val[0]) for val in major_1_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
-    major_2_data = [float(val[0]) for val in major_2_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
-    minor_1_data = [float(val[0]) for val in minor_1_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
-    minor_2_data = [float(val[0]) for val in minor_2_accuracy_column if val and val[0].replace('.', '', 1).isdigit()]
+    # flatten and convert values to float, while excluding empty strings and non-numeric values
+    major_1_data = [float(val[0]) for val in major_1_accuracy_column if val and val[0] and val[0].replace('.', '', 1).isdigit()]
+    major_2_data = [float(val[0]) for val in major_2_accuracy_column if val and val[0] and val[0].replace('.', '', 1).isdigit()]
+    minor_1_data = [float(val[0]) for val in minor_1_accuracy_column if val and val[0] and val[0].replace('.', '', 1).isdigit()]
+    minor_2_data = [float(val[0]) for val in minor_2_accuracy_column if val and val[0] and val[0].replace('.', '', 1).isdigit()]
 
-    # compute average while ignoring NaN values
-    major_accuracy_average = np.nanmean(major_1_data + major_2_data)
-    minor_accuracy_average = np.nanmean(minor_1_data + minor_2_data)
+    # compute average
+    major_accuracy_average = np.mean(major_1_data + major_2_data)
+    minor_accuracy_average = np.mean(minor_1_data + minor_2_data)
 
     return major_accuracy_average, minor_accuracy_average
+
 
     
