@@ -6,7 +6,7 @@ import re
 
 # DATA *****************************************************************************************************************
 # google sheets functions
-from GoogleSheets import update_prediction_columns, append_prediction_data, append_student_data
+from GoogleSheets import update_prediction_columns, append_prediction_data, append_student_data, get_average_scores
 
 # degree requirements dictionary
 from DegreeReq import major_degree_req, minor_degree_req 
