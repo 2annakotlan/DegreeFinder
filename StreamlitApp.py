@@ -175,10 +175,10 @@ def display_analytics_page():
             minor_2 = st.session_state.get("minor_2") 
 
             # retrieve raw scores (if degree not listed, return 0; if degree not inputted, N/A)
-            major_1_raw_score = major_degree_matches_dict.get(major_1, 0) if major_1 else pd.NA
-            major_2_raw_score = major_degree_matches_dict.get(major_2, 0) if major_2 else pd.NA
-            minor_1_raw_score = minor_degree_matches_dict.get(minor_1, 0) if minor_1 else pd.NA
-            minor_2_raw_score = minor_degree_matches_dict.get(minor_2, 0) if minor_2 else pd.NA
+            major_1_raw_score = major_degree_matches_dict.get(major_1, 0) if major_1 else ""
+            major_2_raw_score = major_degree_matches_dict.get(major_2, 0) if major_2 else ""
+            minor_1_raw_score = minor_degree_matches_dict.get(minor_1, 0) if minor_1 else ""
+            minor_2_raw_score = minor_degree_matches_dict.get(minor_2, 0) if minor_2 else ""
             
             # update prediction spreadsheet with new degree offerings 
             #update_prediction_columns(sheet_name = "MajorPredictions", sheet_id = 0) 
