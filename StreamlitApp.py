@@ -174,7 +174,7 @@ def display_analytics_page():
             minor_2 = st.session_state.get("minor_2") 
 
             # retrieve raw scores (if degree not found, return 0)
-            major_1_raw_score = major_degree_matches_dict.get(major_1, 0)  
+            major_1_raw_score = major_degree_matches_dict.get(major_1, 'N/A')  
             major_2_raw_score = major_degree_matches_dict.get(major_2, 0)  
             minor_1_raw_score = minor_degree_matches_dict.get(minor_1, 0)  
             minor_2_raw_score = minor_degree_matches_dict.get(minor_2, 0)  
