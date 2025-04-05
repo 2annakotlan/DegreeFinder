@@ -30,15 +30,26 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
+def display_email_page():    
+    st.title("Degree Finder") # title 
+    st.header("Log In") # login
+
+    user_email = st.text_input("Student Email: ") # email  
+    
+    if user_email:
+        st.write("HI")
+        #verification_code = send_verification_code(user_email) # send verification code
+    
+    #user_code = st.text_input() # verification code
+    #submitted = st.form_submit_button("Next") # submit
+
+
+# DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
     st.title("Degree Finder") # title 
     st.header("Log In") # login
 
     with st.form(key='login_form'):
-        user_email = st.text_input("Student Email: ") # email      
-        verification_code = send_verification_code(user_email) # send verification code
-        #user_code = st.text_input() # verification code
-
         id = st.text_input("Student ID:") # login 
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
@@ -216,8 +227,11 @@ def display_analytics_page():
 
 # PAGE ROUTING *********************************************************************************************************
 if 'page' not in st.session_state:
-    st.session_state.page = 'display_login_page'
+    st.session_state.page = 'display_email_page'
+    #st.session_state.page = 'display_login_page'
 if st.session_state.page == 'display_login_page':
     display_login_page()
 if st.session_state.page == 'display_analytics_page':
     display_analytics_page()
+if st.session_state.page == 'display_email_page':
+    display_email_page()
