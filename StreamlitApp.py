@@ -35,8 +35,8 @@ def display_email_page():
     st.header("Log In") # login
 
     user_email = st.text_input("Student Email: ") # email  
-    verification_code = send_verification_code(user_email) # send verification code
-    st.write(verification_code)
+    #verification_code = send_verification_code(user_email) # send verification code
+    #st.write(verification_code)
     
     #user_code = st.text_input("Verification Code: ") # verification code
         
@@ -229,10 +229,11 @@ def display_analytics_page():
 # PAGE ROUTING *********************************************************************************************************
 if 'page' not in st.session_state:
     st.session_state.page = 'display_email_page'
+if st.session_state.page == 'display_email_page':
+    display_email_page()
 if st.session_state.page == 'display_login_page':
     display_login_page()
 if st.session_state.page == 'display_analytics_page':
     display_analytics_page()
-if st.session_state.page == 'display_email_page':
-    display_email_page()
+
 
