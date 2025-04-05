@@ -35,19 +35,9 @@ def display_email_page():
     st.header("Log In") # login
 
     user_email = st.text_input("Student Email: ") # email  
-    st.session_state["user_email"] = user_email # save in state session
-
-    st.session_state.page = 'display_verification_page'
-    st.rerun()
-
-# DISPLAY LOGIN PAGE ***************************************************************************************************
-def display_verification_page():    
-    st.title("Degree Finder") # title 
-    st.header("Log In") # login
-
-    user_email = st.session_state.get("user_email") # retrieve stored information
     verification_code = send_verification_code(user_email) # send verification code
     st.write(verification_code)
+    
     #user_code = st.text_input("Verification Code: ") # verification code
         
     #if user_code == verification_code: # inputted code matches emailed verification code
@@ -239,12 +229,10 @@ def display_analytics_page():
 # PAGE ROUTING *********************************************************************************************************
 if 'page' not in st.session_state:
     st.session_state.page = 'display_email_page'
-    #st.session_state.page = 'display_login_page'
 if st.session_state.page == 'display_login_page':
     display_login_page()
 if st.session_state.page == 'display_analytics_page':
     display_analytics_page()
 if st.session_state.page == 'display_email_page':
     display_email_page()
-if st.session_state.page == 'display_verification_page':
-    display_verification_page()
+
