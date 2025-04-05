@@ -35,7 +35,7 @@ def display_login_page():
     st.header("Log In") # login
 
     with st.form(key='login_form'):
-        #user_email = st.text_input("Bentley University Email: ") # email      
+        user_email = st.text_input("Bentley University Email: ") # email      
         #verification_code = send_verification_code(user_email) # send verification code
         #user_code = st.text_input() # verification code
 
