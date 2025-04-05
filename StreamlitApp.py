@@ -30,34 +30,40 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
-def display_login_page():    
-    st.title("Degree Finder") # title 
-    st.header("Log In") # login
+def display_login_page():
+    st.title("Degree Finder")
+    st.header("Log In")
 
     with st.form(key='login_form'):
-        user_email = st.text_input("Bentley University Email: ") # email      
-        verification_code = send_verification_code(user_email) # send verification code
-        user_code = st.text_input() # verification code
+        user_email = st.text_input("Bentley University Email: ")
+        verification_code = send_verification_code(user_email)  # Send code
+        user_code = st.text_input("Verification Code: ")  # Input verification code
 
-        id = st.text_input("Student ID:") # login 
-        major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
-        minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
-        major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
-        minor_1, minor_2 = (minor + [""] * 2)[:2] # assigning minor, defaulting to empty string if nothing selected
-        submitted = st.form_submit_button("Next") # submit
-    
-    if submitted and not id:
-        st.error("Student ID Required") # error message 
-
-    if submitted and id:
-        st.session_state["id"] = id # save in state session
-        st.session_state["major_1"] = major_1 # save in state session
-        st.session_state["major_2"] = major_2 # save in state session
-        st.session_state["minor_1"] = minor_1 # save in state session
-        st.session_state["minor_2"] = minor_2 # save in state session
+        student_id = st.text_input("Student ID:")
+        major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2)
+        minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2)
         
-        st.session_state.page = 'display_analytics_page'
-        st.rerun()
+        # Default to empty string if no major/minor is selected
+        major_1, major_2 = (major + [""] * 2)[:2]
+        minor_1, minor_2 = (minor + [""] * 2)[:2]
+        
+        submitted = st.form_submit_button("Next")
+
+    if submitted:
+        if not student_id:
+            st.error("Student ID Required")
+        elif user_code != verification_code:
+            st.error("Incorrect verification code")
+        else:
+            st.session_state["id"] = student_id
+            st.session_state["major_1"] = major_1
+            st.session_state["major_2"] = major_2
+            st.session_state["minor_1"] = minor_1
+            st.session_state["minor_2"] = minor_2
+            
+            # Set the page for the next part
+            st.session_state.page = 'display_analytics_page'
+            st.rerun()
 
 # DISPLAY ANALYTICS PAGE ***********************************************************************************************
 def display_analytics_page():
