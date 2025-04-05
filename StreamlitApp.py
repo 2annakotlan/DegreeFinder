@@ -8,7 +8,7 @@ import re
 # google sheets functions
 from GoogleSheets import update_prediction_columns, append_prediction_data, append_student_data, get_average_scores   
 
-# gmail function
+# email function
 from Email import send_verification_code
 
 # degree requirements dictionary
@@ -37,7 +37,7 @@ def display_email_page():
     user_email = st.text_input("Student Email: ") # email  
     
     if user_email:
-        st.write("HI")
+        st.write(user_email)
         #verification_code = send_verification_code(user_email) # send verification code
     
     #user_code = st.text_input() # verification code
