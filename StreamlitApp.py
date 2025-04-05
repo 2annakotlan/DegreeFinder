@@ -2,7 +2,7 @@ from collections import defaultdict
 import plotly.express as px  
 import streamlit as st
 import pandas as pd 
-import re    
+import re       
 
 # DATA *****************************************************************************************************************
 # google sheets functions
