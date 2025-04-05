@@ -34,12 +34,10 @@ def display_login_page():
     st.title("Degree Finder") # title 
     st.header("Log In") # login
 
-    st.write("Test")
-    
     with st.form(key='login_form'):
         user_email = st.text_input("Bentley University Email: ") # email      
         verification_code = send_verification_code(user_email) # send verification code
-        user_code = st.text_input()
+        user_code = st.text_input() 
         
         if user_code == str(verification_code):
             st.write("Email verified successfully!")
