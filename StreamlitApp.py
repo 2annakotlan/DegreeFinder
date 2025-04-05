@@ -37,12 +37,7 @@ def display_login_page():
     with st.form(key='login_form'):
         user_email = st.text_input("Bentley University Email: ") # email      
         verification_code = send_verification_code(user_email) # send verification code
-        user_code = st.text_input() 
-        
-        if user_code == str(verification_code):
-            st.write("Email verified successfully!")
-        else:
-            st.write("Invalid verification code. Please try again.")
+        user_code = st.text_input() # verification code
 
         id = st.text_input("Student ID:") # login 
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
