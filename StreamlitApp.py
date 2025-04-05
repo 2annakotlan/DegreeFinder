@@ -8,6 +8,9 @@ import re
 # google sheets functions
 from GoogleSheets import update_prediction_columns, append_prediction_data, append_student_data, get_average_scores   
 
+# gmail function
+from Email import send_verification_code
+
 # degree requirements dictionary
 from DegreeReq import major_degree_req, minor_degree_req 
 degree_req = {**major_degree_req, **minor_degree_req}
@@ -32,7 +35,16 @@ def display_login_page():
     st.header("Log In") # login
     
     with st.form(key='login_form'):
-        id = st.text_input("Student ID:") # login
+        user_email = st.text_input("Bentley University Email: ") # email
+        verification_code = send_verification_code(user_email) # send verification code
+        user_code = st.text_input()
+        
+        if user_code == str(verification_code):
+            st.write("Email verified successfully!")
+        else:
+            st.write("Invalid verification code. Please try again.")
+
+        #id = st.text_input("Student ID:") # login
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
         major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
