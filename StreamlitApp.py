@@ -33,6 +33,7 @@ from CourseAZLinks import courseaz_department_dict
 def display_email_page():    
     st.title("Degree Finder") # title 
     st.header("Log In") # login
+    st.title("HI")
 
     user_email = st.text_input("Student Email: ") # email  
     user_email_button = st.button("Enter" )
@@ -45,7 +46,7 @@ def display_email_page():
         user_code_button = st.button("Enter Again")
         
         if user_code_button:
-            st.write(user_code)
+            st.write(user_code) 
         
             if user_code == verification_code: # inputted code matches emailed verification code
                 st.success("Email verified successfully!")
