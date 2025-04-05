@@ -44,7 +44,7 @@ def display_login_page():
         else:
             st.write("Invalid verification code. Please try again.")
 
-        #id = st.text_input("Student ID:") # login
+        id = st.text_input("Student ID:") # login 
         major = st.multiselect("Major (if declared):", list(major_url_dict.keys()), max_selections=2) # major
         minor = st.multiselect("Minor (if declared):", list(minor_url_dict.keys()), max_selections=2) # minor
         major_1, major_2 = (major + [""] * 2)[:2] # assigning major, defaulting to empty string if nothing selected
