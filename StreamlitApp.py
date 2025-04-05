@@ -35,10 +35,11 @@ def display_email_page():
     st.header("Log In") # login
 
     user_email = st.text_input("Student Email: ") # email  
-    verification_code = send_verification_code(user_email) # send verification code
-    #st.write(verification_code)
-    
-    #user_code = st.text_input("Verification Code: ") # verification code
+    if user_email:
+        verification_code = send_verification_code(user_email) # send verification code
+        st.write(verification_code)
+        user_code = st.text_input("Verification Code: ") # input verification code
+        st.write(user_code)
         
     #if user_code == verification_code: # inputted code matches emailed verification code
         #st.success("Email verified successfully!")
