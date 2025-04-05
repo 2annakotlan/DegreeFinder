@@ -37,12 +37,14 @@ def display_email_page():
     user_email = st.text_input("Student Email: ") # email  
     
     if user_email:
-        st.write(user_email)
-        #verification_code = send_verification_code(user_email) # send verification code
+        verification_code = send_verification_code(user_email) # send verification code
     
-    #user_code = st.text_input() # verification code
-    #submitted = st.form_submit_button("Next") # submit
+    user_code = st.text_input() # verification code
 
+    if user_code == str(verification_code):
+        st.success("Email verified successfully!")
+    else:
+        st.error("Invalid verification code. Please try again.")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
