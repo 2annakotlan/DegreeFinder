@@ -39,6 +39,7 @@ def display_email_page():
     if user_email:
         verification_code = send_verification_code(user_email) # send verification code
         st.write(verification_code)
+        st.write(type(verification_code))
     
         user_code = st.text_input("Verification Code: ") # verification code
         
