@@ -40,11 +40,12 @@ def display_email_page():
         verification_code = send_verification_code(user_email) # send verification code
     
         user_code = st.text_input("Verification Code: ") # verification code
-
-        if user_code == str(verification_code):
-            st.success("Email verified successfully!")
-        else:
-            st.error("Invalid verification code. Please try again.")
+        
+        if user_code:
+            if user_code == str(verification_code): # inputted code matches emailed verification code
+                st.success("Email verified successfully!")
+            else:
+                st.error("Invalid verification code. Please try again.")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
