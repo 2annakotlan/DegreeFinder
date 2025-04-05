@@ -33,6 +33,8 @@ from CourseAZLinks import courseaz_department_dict
 def display_login_page():    
     st.title("Degree Finder") # title 
     st.header("Log In") # login
+
+    st.write("Test")
     
     with st.form(key='login_form'):
         user_email = st.text_input("Bentley University Email: ") # email      
