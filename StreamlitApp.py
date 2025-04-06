@@ -47,6 +47,8 @@ def display_email_page():
                     st.success("Email verified successfully!")
                 else:
                     st.error("Invalid")
+                    st.write(f"verification code: {verification_code}")
+                    st.write(f"user code: {user_code}")
     
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
