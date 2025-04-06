@@ -192,7 +192,7 @@ def display_analytics_page():
         if st.button("Submit Results"):
 
             # retrieve stored information 
-            id = st.session_state.get("email") 
+            email = st.session_state.get("email") 
             major_1 = st.session_state.get("major_1") 
             major_2 = st.session_state.get("major_2") 
             minor_1 = st.session_state.get("minor_1") 
