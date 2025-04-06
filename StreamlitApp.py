@@ -31,25 +31,28 @@ from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_email_page():    
-    st.title("Degree Finder") # title 
-    st.header("Log In") # login
+    st.title("Degree Finder") 
+    st.header("Log In") 
     
     user_email = st.text_input("Student Email: ")
-    if user_email:
-        verification_code = send_verification_code(user_email)
 
-        if verification_code:
-            st.write(verification_code)
-            user_code = st.text_input("Enter the Verification Code: ")
-    
-            if user_code:
-                if user_code == verification_code:
-                    st.success("Email verified successfully!")
-                else:
-                    st.error("Invalid")
-                    st.write(f"verification code: {verification_code}")
-                    st.write(f"user code: {user_code}")
-    
+    # Check if email is entered and verification code not already sent/stored
+    if user_email and "verification_code" not in st.session_state:
+        st.session_state.verification_code = send_verification_code(user_email)
+        st.session_state.email_sent_to = user_email  # store email in case they change it
+
+    # Only ask for code if verification has been sent
+    if "verification_code" in st.session_state:
+        st.write("Verification code sent to your email.")
+        user_code = st.text_input("Enter the Verification Code: ")
+
+        if user_code:
+            if user_code == st.session_state.verification_code:
+                st.success("Email verified successfully!")
+            else:
+                st.error("Invalid code")
+                st.write(f"Stored verification code: {st.session_state.verification_code}")
+                st.write(f"User entered: {user_code}")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
