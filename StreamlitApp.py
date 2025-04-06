@@ -53,11 +53,8 @@ def display_email_page():
         if user_code:
             if user_code.strip() == str(st.session_state.verification_code).strip():
                 st.success("Email verified successfully!")
-            else:
+            else: 
                 st.error("Invalid code")
-
-
-
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
