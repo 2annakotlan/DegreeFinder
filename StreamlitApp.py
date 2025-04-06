@@ -33,16 +33,17 @@ from CourseAZLinks import courseaz_department_dict
 def display_email_page():    
     st.title("Degree Finder") 
     st.header("Log In") 
-    
+
     user_email = st.text_input("Student Email: ")
 
     # verification code in state session (to prevent changes)
-    if "verification_code" not in st.session_state:
+    if "verification_code" and "user_email" not in st.session_state:
         st.session_state.verification_code = send_verification_code(user_email)
+        st.session_state.user_email = user_email
         st.write(user_email)
 
     # user input once verification code sent
-    if "verification_code" in st.session_state:
+    if "verification_code" and "user_email" in st.session_state:
         user_code = st.text_input("Enter the Verification Code: ")
         st.write(user_email)
 
