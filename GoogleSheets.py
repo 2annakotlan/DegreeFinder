@@ -37,7 +37,7 @@ def append_prediction_data(data, email, sheet_name):
 # UPDATE SPREADSHEET WITH STUDENT DATA *********************************************************************************
 def append_student_data(email, major_1, major_2, minor_1, minor_2, major_1_scaled_score, major_2_scaled_score, minor_1_scaled_score, minor_2_scaled_score):
     email_column = service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range='StudentInfo!A2:A').execute().get('values', [])
-    row_number = next((row_number for row_number, row in enumerate(id_column, start=2) if row and row[0] == email), None) # find row number where email already exists
+    row_number = next((row_number for row_number, row in enumerate(email_column, start=2) if row and row[0] == email), None) # find row number where email already exists
     
     spreadsheet_columns = (service.spreadsheets().values().get(spreadsheetId=spreadsheetId, range="StudentInfo!1:1").execute().get('values', []))[0] # spreadsheet columns
     values = [''] * len(spreadsheet_columns) # placeholder to be replaced with data
