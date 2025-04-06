@@ -33,7 +33,6 @@ from CourseAZLinks import courseaz_department_dict
 def display_email_page():
     st.title("Degree Finder") 
     st.header("Log In")
-    st.write("NO")
 
     user_email = st.text_input("Student Email:") # user input
     if user_email:
