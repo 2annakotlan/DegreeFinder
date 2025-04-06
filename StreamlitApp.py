@@ -39,7 +39,6 @@ def display_email_page():
     # store email and verification code in state session (to prevent changes)
     if user_email and "verification_code" not in st.session_state:
         st.session_state.verification_code = send_verification_code(user_email)
-        st.session_state.email_sent_to = user_email  
 
     # user input once verification code sent
     if "verification_code" in st.session_state:
