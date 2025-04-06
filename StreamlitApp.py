@@ -48,6 +48,9 @@ def display_email_page():
         user_code = st.text_input("Enter the Verification Code:")
     
         if user_code:
+
+            st.write(user_code)
+            st.write(st.session_state.verification_code)
             #if user_code.strip() == str(st.session_state.verification_code).strip():
             if user_code.strip() == st.session_state.verification_code:
                 st.success("Email verified successfully!")
