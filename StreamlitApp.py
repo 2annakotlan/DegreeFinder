@@ -231,7 +231,7 @@ def display_analytics_page():
             append_prediction_data(data = minor_degree_matches_dict, email = email, sheet_name = "MinorPredictions") 
 
             # update student data spreadsheet with results
-            append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_scaled_score, major_2_scaled_score, minor_1_scaled_score, minor_2_scaled_score)   
+            append_student_data(email, major_1, major_2, minor_1, minor_2, major_1_scaled_score, major_2_scaled_score, minor_1_scaled_score, minor_2_scaled_score)   
             
             st.success("Submitted") 
 
