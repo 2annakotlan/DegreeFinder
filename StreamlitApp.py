@@ -51,6 +51,7 @@ def display_email_page():
         st.write(st.session_state.verification_code)
         st.write(str(st.session_state.verification_code))
         st.write(str(st.session_state.verification_code).strip())   
+        st.write("NO")
         
         if user_code:
             if user_code.strip() == str(st.session_state.verification_code).strip():
