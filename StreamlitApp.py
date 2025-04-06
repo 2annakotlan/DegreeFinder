@@ -237,7 +237,7 @@ if 'page' not in st.session_state:
 if st.session_state.page == 'display_email_page':
     display_email_page()
 if st.session_state.page == 'display_info_page':
-    display_login_page()
+    display_info_page()
 if st.session_state.page == 'display_analytics_page':
     display_analytics_page()
 
