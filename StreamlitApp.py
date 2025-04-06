@@ -54,7 +54,9 @@ def display_email_page():
         st.write(f"4.{str(st.session_state.verification_code)}")
         st.write(f"5.{str(st.session_state.verification_code).strip()}")   
         if st.session_state.verification_code == str(st.session_state.verification_code):
-            st.write("equal also")
+            st.write("equal also 1")
+        if str(st.session_state.verification_code).strip() == str(st.session_state.verification_code):
+            st.write("equal also 2")
         
         if user_code:
             if user_code == st.session_state.verification_code:
