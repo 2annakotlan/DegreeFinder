@@ -48,10 +48,13 @@ def display_email_page():
         user_code = st.text_input("Enter the Verification Code:")
         st.write(f"1.{user_code}")
         st.write(f"2.{user_code.strip()}")
+        if user_code = (user_code.strip()):
+            st.write("equal")
         st.write(f"3.{st.session_state.verification_code}")
         st.write(f"4.{str(st.session_state.verification_code)}")
         st.write(f"5.{str(st.session_state.verification_code).strip()}")   
-        st.write("NO")
+        if st.session_state.verification_code = str(st.session_state.verification_code):
+            st.write("equal also")
         
         if user_code:
             if user_code == st.session_state.verification_code:
@@ -60,10 +63,13 @@ def display_email_page():
                 st.error("Invalid code")
                 st.write(f"1.{user_code}")
                 st.write(f"2.{user_code.strip()}")
+                if user_code = (user_code.strip()):
+                    st.write("equal")
                 st.write(f"3.{st.session_state.verification_code}")
                 st.write(f"4.{str(st.session_state.verification_code)}")
                 st.write(f"5.{str(st.session_state.verification_code).strip()}")   
-                st.write("NO")
+                if st.session_state.verification_code = str(st.session_state.verification_code):
+                    st.write("equal also")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
