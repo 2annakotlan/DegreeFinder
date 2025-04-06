@@ -5,14 +5,6 @@ from email.mime.multipart import MIMEMultipart
 import streamlit as st
 
 def send_verification_code(user_email):
-
-import smtplib
-import random
-import streamlit as st
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-
-def send_verification_code(user_email):
     sender_email = "noreply.socialnetworkapp@gmail.com"
     sender_password = "mmfg chsp hbhz hhav"
 
