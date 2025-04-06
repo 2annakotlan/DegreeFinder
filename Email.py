@@ -22,7 +22,7 @@ def send_verification_code(user_email):
         body = f"Your verification code is: {verification_code}"
         msg = MIMEMultipart()  
         msg['From'] = 'Social Network App <noreply.socialnetworkapp@gmail.com>'
-        msg['To'] = user_email.strip()
+        msg['To'] = user_email
         msg['Subject'] = subject
         msg.attach(MIMEText(body, 'plain'))
     
