@@ -43,7 +43,6 @@ def display_email_page():
 
     # only ask for code if verification has been sent
     if "verification_code" in st.session_state:
-        st.write("Verification code sent to your email.")
         user_code = st.text_input("Enter the Verification Code: ")
         st.write(st.session_state.verification_code)
         st.write(st.session_state.email_sent_to)
