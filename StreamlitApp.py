@@ -199,8 +199,15 @@ def display_analytics_page():
             minor_2 = st.session_state.get("minor_2") 
 
             # scaling factor
-            major_scale = 1/(max(major_degree_matches_dict.values()))
-            minor_scale = 1/(max(minor_degree_matches_dict.values()))
+            if major_degree_matches_dict >= 1:
+                major_scale = 1/(max(major_degree_matches_dict.values()))
+            else:
+                major_scale = None
+                
+            if minor_degree_matches_dict >= 1:
+                minor_scale = 1/(max(minor_degree_matches_dict.values()))
+            else:
+                minor_scale = None
             
             # retrieve scores (if degree not listed, return 0; if degree not inputted, N/A) 
             major_1_raw_score = (major_degree_matches_dict.get(major_1, 0) if major_1 else "")
