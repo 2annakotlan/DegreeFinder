@@ -51,7 +51,7 @@ def display_email_page():
         if user_code:
             if user_code == str(st.session_state.verification_code): # if code is correct...
                 st.session_state["email"] = st.session_state.most_recent_user_email # save email to state session
-                st.session_state.page = 'display_info_page'
+                st.session_state.page = 'display_info_page'    
             else:
                 st.error("Invalid Code") 
 
