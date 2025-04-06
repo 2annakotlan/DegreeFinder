@@ -30,24 +30,34 @@ course_des = {course: description for course, description in course_des.items() 
 from CourseAZLinks import courseaz_department_dict
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
-def display_email_page():    
+def display_email_page():
     st.title("Degree Finder") 
-    st.header("Log In") 
+    st.header("Log In")
 
-    user_email = st.text_input("Student Email:") # user input email
-    if user_email: # if email submitted
-        if st.session_state.get("most_recent_user_email") != user_email: # if the most recent user email != the current user email...
-            st.session_state.most_recent_user_email = user_email # make them equal
-            st.session_state.verification_code = send_verification_code(user_email) # send the verification email
-            
-    if "verification_code" in st.session_state: # once verification code exists...
-        user_code = st.text_input("Verification Code:") # user input verification code
+    allowed_domain = "@falcon.bentley.edu"
+    user_email = st.text_input("Student Email:")
+
+    # Step 1: Validate email domain
+    if user_email:
+        if not user_email.endswith(allowed_domain):
+            st.error(f"Only emails ending in {allowed_domain} are allowed.")
+            return 
+
+        # Step 2: Send verification code if new email
+        if st.session_state.get("most_recent_user_email") != user_email:
+            st.session_state.most_recent_user_email = user_email
+            st.session_state.verification_code = send_verification_code(user_email)
+
+    # Step 3: Ask for verification code if one was sent
+    if "verification_code" in st.session_state:
+        user_code = st.text_input("Verification Code:")
         st.info("Please check your Junk or Spam folder if you do not see the email in your inbox.")
 
+        # Step 4: Check code
         if user_code:
             if user_code == str(st.session_state.verification_code):
                 st.success("Email verified successfully!")
-            else: 
+            else:
                 st.error("Invalid code")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
