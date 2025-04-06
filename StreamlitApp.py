@@ -41,7 +41,7 @@ def display_email_page():
             st.session_state.verification_code = send_verification_code(user_email) # send the verification email
             
     if "verification_code" in st.session_state: # once verification code exists...
-        user_code = st.text_input("Verification Code:") # user input verification code
+        user_code = st.text_input("Verification Code:", help = "if not found in email inbox, check Junk folder") # user input verification code
         
         if user_code:
             if user_code == str(st.session_state.verification_code):
