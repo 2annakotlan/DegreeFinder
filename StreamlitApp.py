@@ -199,12 +199,12 @@ def display_analytics_page():
             minor_2 = st.session_state.get("minor_2") 
 
             # scaling factor
-            if major_degree_matches_dict >= 1:
+            if len(major_degree_matches_dict) >= 1:
                 major_scale = 1/(max(major_degree_matches_dict.values()))
             else:
                 major_scale = None
                 
-            if minor_degree_matches_dict >= 1:
+            if len(minor_degree_matches_dict) >= 1:
                 minor_scale = 1/(max(minor_degree_matches_dict.values()))
             else:
                 minor_scale = None
