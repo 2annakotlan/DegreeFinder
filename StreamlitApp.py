@@ -34,19 +34,18 @@ def display_email_page():
     st.title("Degree Finder") 
     st.header("Log In") 
 
+
+    # Email input
     user_email = st.text_input("Student Email:")
     
-    # If the user changes their email, reset the code
-    if "email_sent_to" in st.session_state and user_email != st.session_state.email_sent_to:
-        st.session_state.pop("verification_code", None)
-        st.session_state.pop("email_sent_to", None)
+    # Check if email was submitted (i.e., Enter was pressed)
+    if user_email:
+        if st.session_state.get("email_sent_to") != user_email:
+            st.session_state.verification_code = send_verification_code(user_email)
+            st.session_state.email_sent_to = user_email
+            st.success(f"Verification code sent to {user_email}!")
     
-    # Check if email is entered and verification code not already sent / stored
-    if user_email and "verification_code" not in st.session_state:
-        st.session_state.verification_code = send_verification_code(user_email)
-        st.session_state.email_sent_to = user_email  # store email in case they change it
-    
-    # Only ask for code if verification has been sent
+    # If verification was sent, show input for code
     if "verification_code" in st.session_state:
         user_code = st.text_input("Enter the Verification Code:")
     
@@ -55,6 +54,8 @@ def display_email_page():
                 st.success("Email verified successfully!")
             else:
                 st.error("Invalid code")
+
+
 
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
