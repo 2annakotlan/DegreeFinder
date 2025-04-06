@@ -42,7 +42,7 @@ def display_email_page():
             
     if "verification_code" in st.session_state: # once verification code exists...
         user_code = st.text_input("Verification Code:", help = "if not found in email inbox, check Junk folder") # user input verification code
-        st.warning("check Junk folder")
+        st.info("check Junk folder")
         
         if user_code:
             if user_code == str(st.session_state.verification_code):
