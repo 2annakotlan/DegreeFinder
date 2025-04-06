@@ -9,7 +9,7 @@ import re
 from GoogleSheets import update_prediction_columns, append_prediction_data, append_student_data, get_average_scores   
 
 # email function
-#from Email import send_verification_code
+from Email import send_verification_code
 
 # degree requirements dictionary
 from DegreeReq import major_degree_req, minor_degree_req 
@@ -33,11 +33,6 @@ from CourseAZLinks import courseaz_department_dict
 def display_email_page():    
     st.title("Degree Finder") # title 
     st.header("Log In") # login
-
-    
-    # Assuming send_verification_code is a function that returns the code
-    def send_verification_code(email):
-        return "123456"  # Simulate sending a code for testing
     
     # Initialize session state if not already done
     if 'verification_code' not in st.session_state:
