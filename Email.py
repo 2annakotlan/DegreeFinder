@@ -29,7 +29,6 @@ def send_verification_code(user_email):
         # send the email
         server.sendmail(sender_email, user_email, msg.as_string())
         server.quit()
-        st.write(user_email)
         return verification_code
         
     except Exception as e:
