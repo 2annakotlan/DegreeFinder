@@ -4,14 +4,14 @@ import random
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-def send_verification_code(user_email):
-    sender_email = "noreply.socialnetworkapp@gmail.com"
-    sender_password = "mmfg chsp hbhz hhav"
-    
-    # generate random 4-digit verification code
-    verification_code = random.randint(1000, 9999) 
-    
+def send_verification_code(user_email):    
     try:
+        sender_email = "noreply.socialnetworkapp@gmail.com"
+        sender_password = "mmfg chsp hbhz hhav"
+    
+        # generate random 4-digit verification code
+        verification_code = random.randint(1000, 9999) 
+    
         # set up SMTP server
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
