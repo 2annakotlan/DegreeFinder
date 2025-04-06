@@ -56,7 +56,7 @@ def display_email_page():
                 st.error("Invalid Code") 
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
-def display_login_page():    
+def display_info_page():    
     st.title("Degree Finder") # title 
     st.header("Student Info") # login
 
