@@ -33,25 +33,34 @@ from CourseAZLinks import courseaz_department_dict
 def display_email_page():    
     st.title("Degree Finder") # title 
     st.header("Log In") # login
-    st.title("HI")
 
-    user_email = st.text_input("Student Email: ") # email  
-    user_email_button = st.button("Enter" )
+    if 'verification_code' not in st.session_state:
+        st.session_state.verification_code = None
+        st.session_state.user_email = None
+        st.session_state.user_code = None
     
-    if user_email_button:
-        verification_code = send_verification_code(user_email) # send verification code
-        st.write(verification_code)
+    if st.session_state.verification_code is None:
+        user_email = st.text_input("Student Email: ")
         
-        user_code = st.text_input("Verification Code: ") # input verification code
-        user_code_button = st.button("Enter Again")
-        
-        if user_code_button:
-            st.write(user_code) 
-        
-            if user_code == verification_code: # inputted code matches emailed verification code
-                st.success("Email verified successfully!")
-            else:
-                st.error("Invalid verification code. Please try again.")
+        if user_email:
+            # Send verification code when email is entered
+            st.session_state.verification_code = send_verification_code(user_email)
+            st.session_state.user_email = user_email
+            st.write("A verification code has been sent to your email.")
+            
+    # Step 2: Ask for the verification code if email is entered
+    if st.session_state.verification_code is not None and st.session_state.user_code is None:
+        user_code = st.text_input("Enter the Verification Code: ")
+    
+        if user_code:
+            st.session_state.user_code = user_code
+    
+    # Step 3: Verify the code once the user enters it
+    if st.session_state.user_code:
+        if st.session_state.user_code == st.session_state.verification_code:
+            st.success("Email verified successfully!")
+        else:
+            st.error("Invalid verification code. Please try again.")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
