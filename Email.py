@@ -18,7 +18,7 @@ def send_verification_code(user_email):
         server.login(sender_email, sender_password)
     
         # construct email message
-        subject = "Your Verification Code"
+        subject = "Verification Code"
         body = f"Your verification code is: {verification_code}"
         msg = MIMEMultipart()  
         msg['From'] = 'Social Network App <noreply.socialnetworkapp@gmail.com>'
@@ -29,6 +29,7 @@ def send_verification_code(user_email):
         # send the email
         server.sendmail(sender_email, user_email, msg.as_string())
         server.quit()
+        return verification_code
 
     except Exception as e:
         st.error(f"Failed to send verification code: {e}")
