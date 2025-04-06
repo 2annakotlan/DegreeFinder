@@ -59,7 +59,7 @@ def display_email_page():
             st.write("equal also 2")
         
         if user_code:
-            if user_code == st.session_state.verification_code:
+            if user_code == str(st.session_state.verification_code):
                 st.success("Email verified successfully!")
             else: 
                 st.error("Invalid code")
