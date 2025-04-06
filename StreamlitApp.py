@@ -34,36 +34,20 @@ def display_email_page():
     st.title("Degree Finder") # title 
     st.header("Log In") # login
     
-    # Initialize session state if not already done
-    if 'verification_code' not in st.session_state:
-        st.session_state.verification_code = None
-        st.session_state.user_email = None
-        st.session_state.user_code = None
-    
-    # Step 1: Ask for the email
-    if st.session_state.verification_code is None:
-        user_email = st.text_input("Student Email: ")
-        
-        if user_email:
-            # Send verification code when email is entered
-            st.session_state.verification_code = send_verification_code(user_email)
-            st.session_state.user_email = user_email
-            st.write(f"A verification code has been sent to your email. Code: {st.session_state.verification_code}")  # Print the verification code (for error checking)
-            
-    # Step 2: Ask for the verification code if email is entered
-    if st.session_state.verification_code is not None and st.session_state.user_code is None:
-        user_code = st.text_input("Enter the Verification Code: ")
-    
-        if user_code:
-            st.session_state.user_code = user_code
-    
-    # Step 3: Verify the code once the user enters it
-    if st.session_state.user_code:
-        if st.session_state.user_code == st.session_state.verification_code:
-            st.success("Email verified successfully!")
-        else:
-            st.error(f"Invalid verification code. Please try again. (The correct code is {st.session_state.verification_code})")
+    user_email = st.text_input("Student Email: ")
+    if user_email:
+        verification_code = send_verification_code(user_email)
 
+        if verification_code:
+            st.write(verification_code)
+            user_code = st.text_input("Enter the Verification Code: ")
+    
+            if user_code:
+                if user_code == verification_code:
+                    st.success("Email verified successfully!")
+                else:
+                    st.error("Invalid")
+    
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
