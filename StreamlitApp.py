@@ -36,19 +36,23 @@ def display_email_page():
     
     user_email = st.text_input("Student Email: ")
 
-    # store email and verification code in state session (to prevent changes)
-    if user_email and "verification_code" not in st.session_state:
+    # verification code in state session (to prevent changes)
+    if "verification_code" not in st.session_state:
         st.session_state.verification_code = send_verification_code(user_email)
+        st.write(user_email)
 
     # user input once verification code sent
     if "verification_code" in st.session_state:
         user_code = st.text_input("Enter the Verification Code: ")
+        st.write(user_email)
 
         if user_code:
             if user_code.strip() == str(st.session_state.verification_code).strip():
                 st.success("Email verified successfully!")
+                st.write(user_email)
             else:
                 st.error("Invalid code")
+                sst.write(user_email)
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
