@@ -34,7 +34,7 @@ def display_email_page():
     st.title("Degree Finder") 
     st.header("Log In") 
 
-    # Email input
+    # email input
     user_email = st.text_input("Student Email:")
     
     # check if email was submitted 
@@ -46,33 +46,12 @@ def display_email_page():
     # if verification was sent, show input for code
     if "verification_code" in st.session_state:
         user_code = st.text_input("Enter the Verification Code:")
-        st.write(f"1.{user_code}")
-        st.write(f"2.{user_code.strip()}")
-        if user_code == (user_code.strip()):
-            st.write("equal")
-        st.write(f"3.{st.session_state.verification_code}")
-        st.write(f"4.{str(st.session_state.verification_code)}")
-        st.write(f"5.{str(st.session_state.verification_code).strip()}")   
-        if st.session_state.verification_code == str(st.session_state.verification_code):
-            st.write("equal also 1")
-        if str(st.session_state.verification_code).strip() == str(st.session_state.verification_code):
-            st.write("equal also 2")
         
         if user_code:
             if user_code == str(st.session_state.verification_code):
                 st.success("Email verified successfully!")
             else: 
                 st.error("Invalid code")
-                st.write(f"1.{user_code}")
-                st.write(f"2.{user_code.strip()}")
-                if user_code == (user_code.strip()):
-                    st.write("equal")
-                st.write(f"3.{st.session_state.verification_code}")
-                st.write(f"4.{str(st.session_state.verification_code)}")
-                st.write(f"5.{str(st.session_state.verification_code).strip()}")   
-                if st.session_state.verification_code == str(st.session_state.verification_code):
-                    st.write("equal also")
-                st.write("ES")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
