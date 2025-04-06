@@ -82,8 +82,9 @@ def display_analytics_page():
     
     st.title(f"Degree Finder") # title    
     st.sidebar.header("Select Courses")  # sidebar title
-    st.write("Having trouble choosing a major? Pick the classes you've taken and enjoyed, along with the ones you think you might enjoy, and discover which major best fits you!")
-
+    st.write("Having trouble choosing a major?")
+    st.write("Pick the classes you've taken and enjoyed, along with the ones you think you might enjoy, and discover which major best fits you!")
+    
     # CHECKBOXES ***********************************************************************************************************
     # initialize session state for checked boxes
     if 'checked_boxes' not in st.session_state:
