@@ -44,6 +44,7 @@ def display_email_page():
             st.session_state.verification_code = send_verification_code(user_email)
             st.session_state.email_sent_to = user_email
             st.success(f"Verification code sent to {user_email}!")
+            st.write(st.session_state.verification_code)
     
     # If verification was sent, show input for code
     if "verification_code" in st.session_state:
