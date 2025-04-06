@@ -46,11 +46,11 @@ def display_email_page():
     # if verification was sent, show input for code
     if "verification_code" in st.session_state:
         user_code = st.text_input("Enter the Verification Code:")
-        st.write(user_code)
-        st.write(user_code.strip())
-        st.write(st.session_state.verification_code)
-        st.write(str(st.session_state.verification_code))
-        st.write(str(st.session_state.verification_code).strip())   
+        st.write(f"1.{user_code}")
+        st.write(f"2.{user_code.strip()}")
+        st.write(f"3.{st.session_state.verification_code}")
+        st.write(f"4.{str(st.session_state.verification_code)})
+        st.write(f"5.{str(st.session_state.verification_code).strip()})   
         st.write("NO")
         
         if user_code:
