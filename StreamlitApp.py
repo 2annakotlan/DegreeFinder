@@ -34,18 +34,14 @@ def display_email_page():
     st.title("Degree Finder") 
     st.header("Log In") 
 
-    # email input
-    user_email = st.text_input("Student Email:")
-    
-    # check if email was submitted 
-    if user_email:
-        if st.session_state.get("email_sent_to") != user_email:
-            st.session_state.verification_code = send_verification_code(user_email)
-            st.session_state.email_sent_to = user_email
-    
-    # if verification was sent, show input for code
-    if "verification_code" in st.session_state:
-        user_code = st.text_input("Enter the Verification Code:")
+    user_email = st.text_input("Student Email:") # user input email
+    if user_email: # if email submitted
+        if st.session_state.get("most_recent_user_email") != user_email: # if the most recent user email != the current user email...
+            st.session_state.most_recent_user_email = user_email # make them equal
+            st.session_state.verification_code = send_verification_code(user_email) # send the verification email
+            
+    if "verification_code" in st.session_state: # once verification code exists...
+        user_code = st.text_input("Verification Code:") # user input verification code
         
         if user_code:
             if user_code == str(st.session_state.verification_code):
