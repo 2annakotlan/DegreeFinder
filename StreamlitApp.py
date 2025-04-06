@@ -34,11 +34,10 @@ def display_email_page():
     st.title("Degree Finder") 
     st.header("Log In") 
 
-
     # Email input
     user_email = st.text_input("Student Email:")
     
-    # Check if email was submitted (i.e., Enter was pressed)
+    # check if email was submitted 
     if user_email:
         if st.session_state.get("email_sent_to") != user_email:
             st.session_state.verification_code = send_verification_code(user_email)
@@ -46,12 +45,13 @@ def display_email_page():
             st.success(f"Verification code sent to {user_email}!")
             st.write(st.session_state.verification_code)
     
-    # If verification was sent, show input for code
+    # if verification was sent, show input for code
     if "verification_code" in st.session_state:
         user_code = st.text_input("Enter the Verification Code:")
     
         if user_code:
-            if user_code.strip() == str(st.session_state.verification_code).strip():
+            #if user_code.strip() == str(st.session_state.verification_code).strip():
+            if user_code == st.session_state.verification_code
                 st.success("Email verified successfully!")
             else: 
                 st.error("Invalid code")
