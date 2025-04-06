@@ -227,8 +227,8 @@ def display_analytics_page():
             #update_prediction_columns(sheet_name = "MinorPredictions", sheet_id = 375147427) 
             
             # update prediction spreadsheet with results
-            append_prediction_data(data = major_degree_matches_dict, id = id, sheet_name = "MajorPredictions") 
-            append_prediction_data(data = minor_degree_matches_dict, id = id, sheet_name = "MinorPredictions") 
+            append_prediction_data(data = major_degree_matches_dict, email = email, sheet_name = "MajorPredictions") 
+            append_prediction_data(data = minor_degree_matches_dict, email = email, sheet_name = "MinorPredictions") 
 
             # update student data spreadsheet with results
             append_student_data(id, major_1, major_2, minor_1, minor_2, major_1_scaled_score, major_2_scaled_score, minor_1_scaled_score, minor_2_scaled_score)   
