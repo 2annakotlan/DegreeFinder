@@ -9,7 +9,7 @@ import re
 from GoogleSheets import update_prediction_columns, append_prediction_data, append_student_data, get_average_scores   
 
 # email function
-from Email import send_verification_code
+#from Email import send_verification_code
 
 # degree requirements dictionary
 from DegreeReq import major_degree_req, minor_degree_req 
@@ -34,11 +34,18 @@ def display_email_page():
     st.title("Degree Finder") # title 
     st.header("Log In") # login
 
+    
+    # Assuming send_verification_code is a function that returns the code
+    def send_verification_code(email):
+        return "123456"  # Simulate sending a code for testing
+    
+    # Initialize session state if not already done
     if 'verification_code' not in st.session_state:
         st.session_state.verification_code = None
         st.session_state.user_email = None
         st.session_state.user_code = None
     
+    # Step 1: Ask for the email
     if st.session_state.verification_code is None:
         user_email = st.text_input("Student Email: ")
         
@@ -46,7 +53,7 @@ def display_email_page():
             # Send verification code when email is entered
             st.session_state.verification_code = send_verification_code(user_email)
             st.session_state.user_email = user_email
-            st.write("A verification code has been sent to your email.")
+            st.write(f"A verification code has been sent to your email. Code: {st.session_state.verification_code}")  # Print the verification code (for error checking)
             
     # Step 2: Ask for the verification code if email is entered
     if st.session_state.verification_code is not None and st.session_state.user_code is None:
@@ -60,7 +67,8 @@ def display_email_page():
         if st.session_state.user_code == st.session_state.verification_code:
             st.success("Email verified successfully!")
         else:
-            st.error("Invalid verification code. Please try again.")
+            st.error(f"Invalid verification code. Please try again. (The correct code is {st.session_state.verification_code})")
+
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
