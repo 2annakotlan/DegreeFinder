@@ -52,7 +52,7 @@ def display_email_page():
                 st.write(user_email)
             else:
                 st.error("Invalid code")
-                sst.write(user_email)
+                st.write(user_email)
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
