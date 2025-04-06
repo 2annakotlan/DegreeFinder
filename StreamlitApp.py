@@ -45,14 +45,14 @@ def display_email_page():
     if "verification_code" in st.session_state:
         st.write("Verification code sent to your email.")
         user_code = st.text_input("Enter the Verification Code: ")
+        st.write(verification_code)
+        st.write(user_email)
 
         if user_code:
             if user_code.strip() == str(st.session_state.verification_code).strip():
                 st.success("Email verified successfully!")
-                st.write(user_email)
             else:
                 st.error("Invalid code")
-                st.write(user_email)
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
