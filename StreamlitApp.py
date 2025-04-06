@@ -70,6 +70,7 @@ def display_email_page():
                 st.write(f"5.{str(st.session_state.verification_code).strip()}")   
                 if st.session_state.verification_code = str(st.session_state.verification_code):
                     st.write("equal also")
+                st.write("ES")
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_login_page():    
