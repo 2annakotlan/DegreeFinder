@@ -47,7 +47,7 @@ def display_email_page():
     if "verification_code" in st.session_state:
         user_code = st.text_input("Enter the Verification Code:")
         st.write(user_code.strip())
-        st.write(str(st.session_state.verification_code).strip()))
+        st.write(str(st.session_state.verification_code).strip())
     
         if user_code:
             if user_code.strip() == str(st.session_state.verification_code).strip():
