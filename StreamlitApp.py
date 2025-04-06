@@ -82,7 +82,7 @@ def display_analytics_page():
     
     st.title(f"Degree Finder") # title    
     st.sidebar.header("Select Courses")  # sidebar title
-    st.write("Having trouble choosing a major? Pick the classes you enjoy and discover which major best fits you!") # instructions
+    st.write("Having trouble choosing a major? Pick the classes you've taken that you've enjoy + classes you think you might enjoy taking, and discover which major best fits you!") # instructions
     
     # CHECKBOXES ***********************************************************************************************************
     # initialize session state for checked boxes
