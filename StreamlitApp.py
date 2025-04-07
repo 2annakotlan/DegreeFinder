@@ -191,7 +191,7 @@ def display_analytics_page():
         
     # GOOGLE SHEETS ********************************************************************************************************
     if len(major_degree_matches_dict) >= 1 or len(minor_degree_matches_dict) >= 1:
-        if st.button("Share Results"):
+        if st.button("Submit Results, help = "Click to submit results to Bentley University"):
 
             # retrieve stored information 
             email = st.session_state.get("email") 
@@ -234,7 +234,7 @@ def display_analytics_page():
             # update student data spreadsheet with results
             append_student_data(email, major_1, major_2, minor_1, minor_2, major_1_scaled_score, major_2_scaled_score, minor_1_scaled_score, minor_2_scaled_score)   
             
-            st.success("Thank you for sharing your results with Bentley University!") 
+            st.success("Results Submitted") 
 
     # DISPLAY **************************************************************************************************************
     st.markdown('<p style="font-weight:bold;">Designed by Anna Kotlan, Class of 2025</p>', unsafe_allow_html=True)
