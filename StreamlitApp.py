@@ -45,7 +45,7 @@ def display_email_page():
             st.session_state.verification_code = send_verification_code(user_email) # send verification code
 
     if "verification_code" in st.session_state: # if verification code was sent... 
-        user_code = st.text_input("Verification Code:") # user input  
+        user_code = st.text_input("Verification Code:", help = f"code: {st.session_state.verification_code}") # user input  
         st.info("Please check your Junk or Spam folder if you do not see the email in your inbox") # check your spam
 
         if user_code:
