@@ -191,7 +191,7 @@ def display_analytics_page():
         
     # GOOGLE SHEETS ********************************************************************************************************
     if len(major_degree_matches_dict) >= 1 or len(minor_degree_matches_dict) >= 1:
-        if st.button("Submit Results, help = "Click to submit results to Bentley University"):
+        if st.button("Submit Results", help="Click to submit results to Bentley University"):
 
             # retrieve stored information 
             email = st.session_state.get("email") 
