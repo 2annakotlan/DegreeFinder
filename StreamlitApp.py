@@ -34,7 +34,7 @@ def display_email_page():
     st.title("Degree Finder") 
     st.header("Log In")
 
-    user_email = st.text_input("Student Email:") # user input
+    user_email = st.text_input(placeholer = "Student Email:", autocomplete = "off") # user input
     if user_email:
         if not user_email.endswith("@falcon.bentley.edu"): # if not a bentley email
             st.error(f"Please enter your Bentley University email ending with '@falcon.bentley.edu'") # error message
@@ -45,7 +45,7 @@ def display_email_page():
             st.session_state.verification_code = send_verification_code(user_email) # send verification code
 
     if "verification_code" in st.session_state: # if verification code was sent... 
-        user_code = st.text_input("Verification Code:", help = f"code: {st.session_state.verification_code}") # user input  
+        user_code = st.text_input(query = "Verification Code:", autocomplete = "off", help = f"code: {st.session_state.verification_code}") # user input  
         st.info("Please check your Junk or Spam folder if you do not see the email in your inbox") # check your spam
 
         if user_code:
