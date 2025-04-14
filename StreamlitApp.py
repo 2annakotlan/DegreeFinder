@@ -103,9 +103,12 @@ def display_analytics_page():
             for course, desc in courses:
                 st.markdown(f'<span style="color:blue">{course}</span>', unsafe_allow_html=True)
                 st.session_state.checked_boxes[course] = st.checkbox(
-                    label=" ",  # empty label since we already show it above
+                    label=" ",  # empty label since we're showing it in blue above
                     value=st.session_state.checked_boxes.get(course, False),
-                    help=desc)
+                    help=desc,
+                    key=course  # ensures each checkbox has a unique ID
+                )
+
     
     # list of checked courses
     checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked]  # list of checked courses
