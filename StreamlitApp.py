@@ -101,13 +101,13 @@ def display_analytics_page():
         department_name = courseaz_department_dict.get(dept, dept)
         with st.sidebar.expander(department_name, expanded=False):
             for course, desc in courses:
-                st.markdown(f'<span style="color:blue">{course}</span>', unsafe_allow_html=True)
                 st.session_state.checked_boxes[course] = st.checkbox(
-                    label=" ",  # empty label since we're showing it in blue above
+                    label=f":blue[{course}] ",
                     value=st.session_state.checked_boxes.get(course, False),
                     help=desc,
-                    key=course  # ensures each checkbox has a unique ID
+                    key=course
                 )
+    
 
     
     # list of checked courses
