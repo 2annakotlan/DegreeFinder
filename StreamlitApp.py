@@ -97,33 +97,15 @@ def display_analytics_page():
         courses_by_department[starting_letters].append((course, desc))
     
     # collapsible sidebar
-    import string
-
-    # Function to map a letter (A-Z) to a color using HSL
-    def letter_to_color(letter):
-        letter = letter.upper()
-        index = string.ascii_uppercase.index(letter)
-        hue = int((index / 25) * 360)  # A-Z → 0–360 hue
-        return f"hsl({hue}, 70%, 50%)"
-    
-    # Updated sidebar loop
-    for dept, courses in courses_by_department.items():  # keep the original order
-        department_name = courseaz_department_dict.get(dept, dept)  # get department name
-        first_letter = department_name[0]  # get first letter
-        color = letter_to_color(first_letter)  # map to gradient color
-    
-        with st.sidebar.expander("", expanded=False):
-            # Apply colored header
-            st.markdown(
-                f"<span style='color:{color}; font-weight:bold; font-size:16px'>{department_name}</span>",
-                unsafe_allow_html=True
-            )
+    for dept, courses in courses_by_department.items():
+        department_name = courseaz_department_dict.get(dept, dept)
+        with st.sidebar.expander(department_name, expanded=False):
             for course, desc in courses:
+                st.markdown(f'<span style="color:blue">{course}</span>', unsafe_allow_html=True)
                 st.session_state.checked_boxes[course] = st.checkbox(
-                    label=f"{course} ",
+                    label=" ",  # empty label since we already show it above
                     value=st.session_state.checked_boxes.get(course, False),
                     help=desc)
-
     
     # list of checked courses
     checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked]  # list of checked courses
