@@ -99,13 +99,12 @@ def display_analytics_page():
     # class strenght
     from collections import Counter
     class_counts = Counter(cls for classes in degree_req.values() for cls in classes)
-    class_strenght_dict = {cls: 1 for cls, count in class_counts.items() if count == 1}
+    class_strength_dict  = {cls: 1 for cls, count in class_counts.items() if count == 1}
 
     blue_shades = ["#cce5ff", "#99ccff", "#66b2ff", "#3399ff", "#0073e6", "#0059b3"]
     max_strength = max(class_strenght_dict.values(), default=1)
 
     def get_blue(strength):
-        # Map strength to an index in blue_shades
         index = int((strength / max_strength) * (len(blue_shades) - 1))
         return blue_shades[index]
     
