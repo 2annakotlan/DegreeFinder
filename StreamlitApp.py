@@ -126,7 +126,12 @@ def display_analytics_page():
     total_selected_boxes = len(checked_courses)
     total_boxes = len(course_des)
     st.sidebar.markdown(f'<p style="color:#FF5733; font-weight:bold;">{total_selected_boxes} out of {total_boxes} classes selected</p>', unsafe_allow_html=True)
-    
+
+    # deselect all button
+    if st.sidebar.button("Deselect All"):
+        for course in st.session_state.checked_boxes:
+            st.session_state.checked_boxes[course] = False
+        
     # CALCULATION **********************************************************************************************************
     # function to calculate percent degree match
     def get_degree_match(degree_req):
