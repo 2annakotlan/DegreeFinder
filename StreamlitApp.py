@@ -111,17 +111,17 @@ def display_analytics_page():
     
     # collapsible sidebar
     for dept, courses in courses_by_department.items():
-    department_name = courseaz_department_dict.get(dept, dept)
-    with st.sidebar.expander(department_name, expanded=False):
-        for course, desc in courses:
-            strength = class_strength_dict.get(course, 0)
-            color = get_blue(strength)
-            st.session_state.checked_boxes[course] = st.checkbox(
-                label=f"<span style='color:{color}'>{course}</span>",
-                value=st.session_state.checked_boxes.get(course, False),
-                help=desc,
-                unsafe_allow_html=True
-            )
+        department_name = courseaz_department_dict.get(dept, dept)
+        with st.sidebar.expander(department_name, expanded=False):
+            for course, desc in courses:
+                strength = class_strength_dict.get(course, 0)
+                color = get_blue(strength)
+                st.session_state.checked_boxes[course] = st.checkbox(
+                    label=f"<span style='color:{color}'>{course}</span>",
+                    value=st.session_state.checked_boxes.get(course, False),
+                    help=desc,
+                    unsafe_allow_html=True
+                )
 
     # list of checked courses
     checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked]  # list of checked courses
