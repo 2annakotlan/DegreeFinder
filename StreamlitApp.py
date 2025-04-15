@@ -1,4 +1,5 @@
 from collections import defaultdict
+from collections import Counter
 import plotly.express as px  
 import streamlit as st
 import pandas as pd 
@@ -97,7 +98,6 @@ def display_analytics_page():
         courses_by_department[starting_letters].append((course, desc))
 
     # class strengths
-    from collections import Counter
     class_strength_dict = Counter(cls for classes in degree_req.values() for cls in classes)
     
     strength_emojis = ["🔴", "🟠", "🟡", "🟢", "🔵", "🟣"]   
