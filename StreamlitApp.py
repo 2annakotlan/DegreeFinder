@@ -131,6 +131,7 @@ def display_analytics_page():
     if st.sidebar.button("Deselect All"):
         for course in st.session_state.checked_boxes:
             st.session_state.checked_boxes[course] = False
+        st.rerun()
         
     # CALCULATION **********************************************************************************************************
     # function to calculate percent degree match
