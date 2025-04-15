@@ -97,32 +97,14 @@ def display_analytics_page():
         courses_by_department[starting_letters].append((course, desc))
     
     # collapsible sidebar
-
-    # Example function to map first letters to a range of blue shades
-    def get_blue_shade(course_name):
-        first_letter = course_name[0].upper()
-        letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        index = letters.find(first_letter)
-        # clamp between 0 and 25
-        index = max(0, min(index, 25))
-        # generate a hex color between light blue and dark blue
-        blue_shades = [
-            f"#{int(173 - (i * 5)):02x}{int(216 - (i * 3)):02x}{int(230 - (i * 2)):02x}" for i in range(26)
-        ]
-        return blue_shades[index]
-    
-    for dept, courses in courses_by_department.items():
-        department_name = courseaz_department_dict.get(dept, dept)
+    for dept, courses in courses_by_department.items():  # keep the original order
+        department_name = courseaz_department_dict.get(dept, dept)  # get department name
         with st.sidebar.expander(department_name, expanded=False):
             for course, desc in courses:
-                color = get_blue_shade(course)
-                label_html = f'<span style="color:{color}; font-weight:500;">{course}</span>'
                 st.session_state.checked_boxes[course] = st.checkbox(
-                    label=label_html,
+                    label=f":blue[{course}]",  # Streamlit markdown style for blue text
                     value=st.session_state.checked_boxes.get(course, False),
-                    help=desc,
-                    key=course
-                )
+                    help=desc)
 
     
     # list of checked courses
