@@ -96,17 +96,18 @@ def display_analytics_page():
         starting_letters = re.match(r"([A-Za-z\s]+)\d+", course).group(1).strip()
         courses_by_department[starting_letters].append((course, desc))
 
-    # class strenght
+    # class strengths
     from collections import Counter
+
     class_counts = Counter(cls for classes in degree_req.values() for cls in classes)
-    class_strength_dict  = {cls: 1 for cls, count in class_counts.items() if count == 1}
-
-    blue_shades = ["#cce5ff", "#99ccff", "#66b2ff", "#3399ff", "#0073e6", "#0059b3"]
+    class_strength_dict = {cls: 1 for cls, count in class_counts.items() if count == 1}
+    
+    strength_emojis = ["📘", "📘", "📘", "📗", "📘📗", "📙"]
     max_strength = max(class_strength_dict.values(), default=1)
-
-    def get_blue(strength):
-        index = int((strength / max_strength) * (len(blue_shades) - 1))
-        return blue_shades[index]
+    
+    def get_strength_emoji(strength):
+        index = int((strength / max_strength) * (len(strength_emojis) - 1))
+        return strength_emojis[index]
     
     # collapsible sidebar
     for dept, courses in courses_by_department.items():
@@ -114,13 +115,11 @@ def display_analytics_page():
         with st.sidebar.expander(department_name, expanded=False):
             for course, desc in courses:
                 strength = class_strength_dict.get(course, 0)
-                color = get_blue(strength)
+                emoji = get_strength_emoji(strength)
                 st.session_state.checked_boxes[course] = st.checkbox(
-                    label=f"<span style='color:{color}'>{course}</span>",
+                    label=f"{emoji} {course}",
                     value=st.session_state.checked_boxes.get(course, False),
-                    help=desc,
-                    unsafe_allow_html=True
-                )
+                    help=desc)
 
     # list of checked courses
     checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked]  # list of checked courses
