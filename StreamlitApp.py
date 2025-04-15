@@ -102,7 +102,7 @@ def display_analytics_page():
     class_strength_dict  = {cls: 1 for cls, count in class_counts.items() if count == 1}
 
     blue_shades = ["#cce5ff", "#99ccff", "#66b2ff", "#3399ff", "#0073e6", "#0059b3"]
-    max_strength = max(class_strenght_dict.values(), default=1)
+    max_strength = max(class_strength_dict.values(), default=1)
 
     def get_blue(strength):
         index = int((strength / max_strength) * (len(blue_shades) - 1))
