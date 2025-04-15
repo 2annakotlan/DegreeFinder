@@ -97,8 +97,7 @@ def display_analytics_page():
         courses_by_department[starting_letters].append((course, desc))
     
     # collapsible sidebar
-    import streamlit as st
-    
+
     # Example function to map first letters to a range of blue shades
     def get_blue_shade(course_name):
         first_letter = course_name[0].upper()
