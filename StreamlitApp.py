@@ -95,18 +95,34 @@ def display_analytics_page():
     for course, desc in course_des.items():
         starting_letters = re.match(r"([A-Za-z\s]+)\d+", course).group(1).strip()
         courses_by_department[starting_letters].append((course, desc))
+
+    # class strenght
+    from collections import Counter
+    class_counts = Counter(cls for classes in degree_req.values() for cls in classes)
+    class_strenght_dict = {cls: 1 for cls, count in class_counts.items() if count == 1}
+
+    blue_shades = ["#cce5ff", "#99ccff", "#66b2ff", "#3399ff", "#0073e6", "#0059b3"]
+    max_strength = max(class_strength_dict.values(), default=1)
+
+    def get_blue(strength):
+        # Map strength to an index in blue_shades
+        index = int((strength / max_strength) * (len(blue_shades) - 1))
+        return blue_shades[index]
     
     # collapsible sidebar
-    for dept, courses in courses_by_department.items():  # keep the original order
-        department_name = courseaz_department_dict.get(dept, dept)  # get department name
-        with st.sidebar.expander(department_name, expanded=False):
-            for course, desc in courses:
-                st.session_state.checked_boxes[course] = st.checkbox(
-                    label=f":blue[{course}]",  # Streamlit markdown style for blue text
-                    value=st.session_state.checked_boxes.get(course, False),
-                    help=desc)
+    for dept, courses in courses_by_department.items():
+    department_name = courseaz_department_dict.get(dept, dept)
+    with st.sidebar.expander(department_name, expanded=False):
+        for course, desc in courses:
+            strength = class_strength_dict.get(course, 0)
+            color = get_blue(strength)
+            st.session_state.checked_boxes[course] = st.checkbox(
+                label=f"<span style='color:{color}'>{course}</span>",
+                value=st.session_state.checked_boxes.get(course, False),
+                help=desc,
+                unsafe_allow_html=True
+            )
 
-    
     # list of checked courses
     checked_courses = [course for course, checked in st.session_state.checked_boxes.items() if checked]  # list of checked courses
     
