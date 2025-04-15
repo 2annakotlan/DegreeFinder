@@ -102,7 +102,7 @@ def display_analytics_page():
     class_counts = Counter(cls for classes in degree_req.values() for cls in classes)
     class_strength_dict = {cls: 1 for cls, count in class_counts.items() if count == 1}
     
-    strength_emojis = ["🔴", "🟠", "🟡", "🟢", "🔵", "🟣"]
+    strength_emojis = ["🔴", "🟠", "🟡", "🟢", "🔵", "🟣"]   
     max_strength = max(class_strength_dict.values(), default=1)
     
     def get_strength_emoji(strength):
