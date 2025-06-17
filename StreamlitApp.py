@@ -127,8 +127,15 @@ def display_analytics_page():
     total_boxes = len(course_des)
     st.sidebar.markdown(f'<p style="color:#FF5733; font-weight:bold;">{total_selected_boxes} out of {total_boxes} classes selected</p>', unsafe_allow_html=True)
 
-    # deselect all button
-    if st.sidebar.button("Deselect All"):
+    # select and deselect all buttons
+    col1, col2 = st.sidebar.columns(2)
+    
+    if col1.button("Select All"):
+        for course in st.session_state.checked_boxes:
+            st.session_state.checked_boxes[course] = True
+        st.rerun()
+    
+    if col2.button("Deselect All"):
         for course in st.session_state.checked_boxes:
             st.session_state.checked_boxes[course] = False
         st.rerun()
