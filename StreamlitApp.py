@@ -163,11 +163,12 @@ def display_analytics_page():
     
         # sorting and filtering
         sorted_degree_matches_dict = dict(sorted(degree_matches_dict.items(), key=lambda item: item[1], reverse=True)) # sorted from greatest to least
-        non_zero_degree_matches_dict = {degree: match for degree, match in sorted_degree_matches_dict.items() if match != 0} # removing 0 percent match
+        #non_zero_degree_matches_dict = {degree: match for degree, match in sorted_degree_matches_dict.items() if match != 0} # removing 0 percent match
         sorted_degree_matches_df = degree_matches_df.sort_values(by='Percent Match', ascending=False) # sorted from greatest to least
-        non_zero_degree_matches_df = sorted_degree_matches_df[sorted_degree_matches_df['Percent Match'] != 0] # removing 0 percent match
+        #non_zero_degree_matches_df = sorted_degree_matches_df[sorted_degree_matches_df['Percent Match'] != 0] # removing 0 percent match
     
-        return non_zero_degree_matches_dict, non_zero_degree_matches_df
+        #return non_zero_degree_matches_dict, non_zero_degree_matches_df
+        #return sorted_degree_matches_dict, sorted_degree_matches_df
     
     # call the function
     major_degree_matches_dict, major_degree_matches_df = get_degree_match(major_degree_req)
