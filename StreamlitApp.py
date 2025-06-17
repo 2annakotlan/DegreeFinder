@@ -168,7 +168,7 @@ def display_analytics_page():
         #non_zero_degree_matches_df = sorted_degree_matches_df[sorted_degree_matches_df['Percent Match'] != 0] # removing 0 percent match
     
         #return non_zero_degree_matches_dict, non_zero_degree_matches_df
-        #return sorted_degree_matches_dict, sorted_degree_matches_df
+        return sorted_degree_matches_dict, sorted_degree_matches_df
     
     # call the function
     major_degree_matches_dict, major_degree_matches_df = get_degree_match(major_degree_req)
