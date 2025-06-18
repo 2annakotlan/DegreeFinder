@@ -113,15 +113,15 @@ def display_analytics_page():
         with st.sidebar.expander(department_name, expanded=False):
 
     # department specific select and deselect all buttons
-        col1, col2 = st.columns(2)
-        if col1.button(f"Select All {dept}"):
-            for course, _ in courses:
-                st.session_state.checked_boxes[course] = True
-            st.rerun()
-        if col2.button(f"Deselect All {dept}"):
-            for course, _ in courses:
-                st.session_state.checked_boxes[course] = False
-            st.rerun()
+            col1, col2 = st.columns(2)
+            if col1.button(f"Select All {dept}"):
+                for course, _ in courses:
+                    st.session_state.checked_boxes[course] = True
+                st.rerun()
+            if col2.button(f"Deselect All {dept}"):
+                for course, _ in courses:
+                    st.session_state.checked_boxes[course] = False
+                st.rerun()
 
     # course checkboxes
             for course, desc in courses:
