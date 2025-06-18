@@ -111,6 +111,19 @@ def display_analytics_page():
     for dept, courses in courses_by_department.items():
         department_name = courseaz_department_dict.get(dept, dept)
         with st.sidebar.expander(department_name, expanded=False):
+
+    # department specific select and deselect all buttons
+        col1, col2 = st.columns(2)
+        if col1.button(f"Select All {dept}"):
+            for course, _ in courses:
+                st.session_state.checked_boxes[course] = True
+            st.rerun()
+        if col2.button(f"Deselect All {dept}"):
+            for course, _ in courses:
+                st.session_state.checked_boxes[course] = False
+            st.rerun()
+
+    # course checkboxes
             for course, desc in courses:
                 strength = class_strength_dict.get(course, 0)
                 emoji = get_strength_emoji(strength)
