@@ -1,4 +1,5 @@
 **DegreeFinder**
+https://bentleydegreefinder.streamlit.app/
 
 **App Overview**
 - helps Bentley University students chose their degree by selecting classes that interest them
