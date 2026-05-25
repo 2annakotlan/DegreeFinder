@@ -33,6 +33,6 @@ def send_verification_code(user_email):
 
     except Exception as e:
         st.error(f"Failed to send verification code: {e}")
-        return None
+        return none
 
 
