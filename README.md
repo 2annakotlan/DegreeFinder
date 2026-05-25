@@ -2,7 +2,7 @@
 - https://bentleydegreefinder.streamlit.app/
 
 **App Overview**
-- helps Bentley University students chose their degree by selecting classes that interest them (email verification temporarily turned off for testing)
+- helps Bentley University students chose their degree by selecting classes that interest them
 
 **App Features**
 - checkboxes of classes (with hovering tooltip to view class descriptions and dropdown to filter classes)
@@ -18,6 +18,7 @@
 - **DegreeReq:** gets degree requirements (classes within "major courses") (ie. {'Accounting Major (B.S.)': ['Preparing and Interpreting Financial Statements', 'Performance Measurement', 'Cost Management', 'Financial Accounting and Reporting I', 'Financial Accounting and Reporting II', 'Accounting Information Systems', 'Federal Taxation', 'Financial Statement Auditing', 'Internal Auditing'])
 - **StreamlitApp:** creates user interface (checkboxes, percent degree match calculation, barcharts, lists) 
   
-**Maintenance**
-- if the webscraping from the different App Files does not work (would only occur if Bentley University changed the format of their websites), comment out the code and instead use the hard-coded value(s) at the bottom of the page
-- if the app "sleeps" (would only occur due to 24+ hours of inactivity), the user themsevles can wake the app up 
+**Maintenance & Next Steps**
+- if the app "sleeps" (would only occur due to 24+ hours of inactivity), the user themsevles can wake the app up
+- email verification temporarily turned off for testing
+- developing enhanced version of application using a new technology stack to support additional functionality and improved performance
