@@ -43,19 +43,21 @@ def display_email_page():
 
         if st.session_state.get("most_recent_user_email") != user_email: # if last user email differs from current user email entered...
             st.session_state.most_recent_user_email = user_email # update last user email entered with current user email entered
-            st.session_state.verification_code = send_verification_code(user_email) # send verification code
+            #st.session_state.verification_code = send_verification_code(user_email) # send verification code
 
-    if "verification_code" in st.session_state: # if verification code was sent... 
-        user_code = st.text_input("Verification Code:", autocomplete = "off", help = f"code: {st.session_state.verification_code}") # user input  
-        st.info("Please check your Junk or Spam folder if you do not see the email in your inbox") # check your spam
+    #if "verification_code" in st.session_state: # if verification code was sent... 
+        #user_code = st.text_input("Verification Code:", autocomplete = "off") # user input  
+        #st.info("Please check your Junk or Spam folder if you do not see the email in your inbox") # check your spam
 
-        if user_code:
-            if user_code == str(st.session_state.verification_code): # if code is correct...
-                st.session_state["email"] = st.session_state.most_recent_user_email # save email to state session
-                st.session_state.page = 'display_info_page'  
-                st.rerun()
-            else:
-                st.error("Invalid Code") 
+        #if user_code:
+            #if user_code == str(st.session_state.verification_code): # if code is correct...
+            
+            st.session_state["email"] = st.session_state.most_recent_user_email # save email to state session
+            st.session_state.page = 'display_info_page'  
+            st.rerun()
+            
+            #else:
+                #st.error("Invalid Code") 
 
 # DISPLAY LOGIN PAGE ***************************************************************************************************
 def display_info_page():    
