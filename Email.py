@@ -13,7 +13,7 @@ def send_verification_code(user_email):
         verification_code = random.randint(1000, 9999) 
     
         # set up SMTP server
-        server = smtplib.SMTP('smtp.office365.com', 587) # server = smtplib.SMTP('smtp.gmail.com', 587)
+        server = smtplib.SMTP('smtp.gmail.com', 587)
         server.starttls()
         server.login(sender_email, sender_password)
     
